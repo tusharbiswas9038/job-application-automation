@@ -89,84 +89,45 @@ function confirmDelete(message) {
 }
 
 // Direct variant generation from job card
-window.generateVariantDirect = async function(jobId, buttonElement) {
-    if (!confirm('Generate resume variant for this job?\n\nThis will take 20-30 seconds.')) {
-        return;
-    }
-    
-    try {
-        const button = buttonElement || event?.target;
-        const originalText = button ? button.textContent : '';
-        
-        if (button) {
-            button.textContent = '⏳ Fetching job...';
+window.generateVariantDirect = async function(jobId) {
+    if (confirm('Generate resume variant for this job?')) {
+        try {
+            // Show loading state
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Generating...';
             button.disabled = true;
-            button.style.opacity = '0.6';
-        }
-        
-        // 1. Fetch job details
-        const jobResponse = await fetch(`/api/jobs/${jobId}`);
-        if (!jobResponse.ok) throw new Error('Failed to fetch job details');
-        
-        const job = await jobResponse.json();
-        
-        if (button) button.textContent = '⏳ Generating...';
-        
-        // 2. Start generation with Form data
-        const formData = new FormData();
-        formData.append('job_title', job.job_title);
-        formData.append('company', job.company);
-        formData.append('job_description', job.job_description);
-        formData.append('target_bullets', '11');
-        formData.append('use_ai', 'true');
-        
-        const genResponse = await fetch('/api/generate/start', {
-            method: 'POST',
-            body: formData
-        });
-        
-        if (!genResponse.ok) {
-            const error = await genResponse.json().catch(() => ({ detail: 'Generation failed' }));
-            throw new Error(error.detail || 'Generation failed');
-        }
-        
-        const result = await genResponse.json();
-        const taskId = result.task_id;
-        
-        // 3. Poll for completion
-        let status;
-        while (true) {
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
-            
-            const statusResponse = await fetch(`/api/generate/status/${taskId}`);
-            status = await statusResponse.json();
-            
-            if (button) {
-                button.textContent = `⏳ ${status.message || 'Generating'}... ${status.progress || 0}%`;
+
+            const response = await fetch('/api/generate/variant', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    job_id: jobId,
+                    target_bullets: 11,
+                    ai_enhancement_enabled: true
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Generation failed');
             }
-            
-            if (status.status === 'completed') {
-                alert(`✅ Variant Generated!\n\n📊 ATS Score: ${status.ats_score ? status.ats_score.toFixed(1) : 'N/A'}\n🤖 Bullets Enhanced: ${status.bullets_enhanced || 0}\n\nRedirecting to job details...`);
-                window.location.href = `/jobs/${jobId}`;
-                return;
-            }
-            
-            if (status.status === 'failed') {
-                throw new Error(status.error || 'Generation failed');
-            }
-        }
-        
-    } catch (error) {
-        console.error('Generation error:', error);
-        alert('❌ Generation Failed\n\n' + error.message);
-        
-        if (button) {
+
+            const result = await response.json();
+
+            alert(`✅ Variant generated!\nATS Score: ${result.ats_score.toFixed(1)}\n\nClick OK to view details.`);
+
+            // Redirect to job detail
+            window.location.href = `/jobs/${jobId}`;
+
+        } catch (error) {
+            alert('❌ Generation failed: ' + error.message);
             button.textContent = originalText;
             button.disabled = false;
-            button.style.opacity = '1';
         }
     }
-};
+}
 
 // Make utilities globally available
 window.utils = utils;

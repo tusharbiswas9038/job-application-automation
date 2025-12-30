@@ -45,15 +45,20 @@
                     <div class="job-title" x-text="job.job_title"></div>
                     <div class="job-company" x-text="job.company"></div>
                 </div>
-                <div>
-                    <span 
-                        class="score-badge" 
-                        :class="utils.getScoreClass(job.best_ats_score)"
-                        x-show="job.best_ats_score > 0"
-                    >
-                        ATS: <span x-text="utils.formatScore(job.best_ats_score)"></span>
-                    </span>
-                </div>
+		<div style="display: flex; gap: 8px; align-items: center;">
+    		<!-- Status Badge -->
+    			<span class="status-badge"
+          		:class="'status-' + job.status"
+          		x-text="job.status.toUpperCase()">
+    			</span>
+
+    		<!-- ATS Score Badge (existing) -->
+    			<span class="score-badge"
+          		:class="utils.getScoreClass(job.best_ats_score)"
+          		x-show="job.best_ats_score > 0">
+        		ATS: <span x-text="utils.formatScore(job.best_ats_score)"></span>
+    			</span>
+		</div>
             </div>
             
             <div class="job-meta">
@@ -69,6 +74,10 @@
                     <span>💰</span>
                     <span x-text="job.salary_range"></span>
                 </div>
+		<div class="job-meta-item" x-show="job.posted_date">
+    		    <span>📆</span>
+    		    <span x-text="'Posted ' + utils.formatDate(job.posted_date)"></span>
+		</div>
                 <div class="job-meta-item">
                     <span>📅</span>
                     <span x-text="'Added ' + utils.formatDate(job.created_at)"></span>
@@ -77,7 +86,7 @@
             
             <div class="job-actions">
                 <a :href="'/jobs/' + job.job_id" class="btn btn-outline btn-sm">View Details</a>
-                <a :href="'/generate?job_id=' + job.job_id" class="btn btn-primary btn-sm">Generate Variant</a>
+                <button @click="generateVariantDirect(job.job_id, $el)" class="btn btn-primary btn-sm">Generate Variant</button>
                 <button @click="deleteJob(job.job_id)" class="btn btn-danger btn-sm">Delete</button>
             </div>
         </div>

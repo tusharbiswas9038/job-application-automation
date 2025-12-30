@@ -121,3 +121,56 @@ async def delete_variant(variant_id: str, user: dict = Depends(get_current_user)
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/{variant_id}/download")
+async def download_pdf(
+    variant_id: str,
+    user: dict = Depends(get_current_user)
+):
+    """Download PDF variant"""
+    from fastapi.responses import FileResponse
+    import os
+
+    db = DatabaseManager()
+    variant = db.get_variant(variant_id)
+
+    if not variant:
+        raise HTTPException(status_code=404, detail="Variant not found")
+
+    pdf_path = variant.get('variant_pdf_path')
+
+    if not pdf_path or not os.path.exists(pdf_path):
+        raise HTTPException(status_code=404, detail="PDF file not found")
+
+    return FileResponse(
+        path=pdf_path,
+        filename=f"resume_{variant_id[:8]}.pdf",
+        media_type="application/pdf"
+    )
+
+@router.get("/{variant_id}/download-tex")
+async def download_tex(
+    variant_id: str,
+    user: dict = Depends(get_current_user)
+):
+    """Download LaTeX source"""
+    from fastapi.responses import FileResponse
+    import os
+
+    db = DatabaseManager()
+    variant = db.get_variant(variant_id)
+
+    if not variant:
+        raise HTTPException(status_code=404, detail="Variant not found")
+
+    tex_path = variant.get('variant_latex_path')
+
+    if not tex_path or not os.path.exists(tex_path):
+        raise HTTPException(status_code=404, detail="LaTeX file not found")
+
+    return FileResponse(
+        path=tex_path,
+        filename=f"resume_{variant_id[:8]}.tex",
+        media_type="application/x-tex"
+    )
+
