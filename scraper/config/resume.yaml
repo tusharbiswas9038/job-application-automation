@@ -1,0 +1,42 @@
+# config/resume.yaml
+resume:
+  # Supported sections
+  supported_sections:
+    - summary
+    - experience
+    - education
+    - skills
+    - certifications
+    - projects
+    - awards
+  
+  # Sections that can be modified by LLM
+  modifiable_sections:
+    - summary
+    - experience
+    - projects
+  
+  # Static sections (never modify)
+  static_sections:
+    - education
+    - certifications
+    - awards
+    - personal
+  
+  # Bullet validation
+  min_bullet_length: 20
+  max_bullet_length: 200
+  min_bullets_per_role: 2
+  max_bullets_per_role: 8
+  
+  # File paths
+  master_resume_dir: "data/resumes"
+  variants_dir: "data/resumes/variants"
+  compiled_dir: "data/resumes/compiled"
+  
+  # LaTeX compilation
+  latex_compiler: "pdflatex"
+  latex_options:
+    - "-interaction=nonstopmode"
+    - "-halt-on-error"
+

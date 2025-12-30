@@ -1,0 +1,97 @@
+{
+  "original_file": "data/resumes/my_resume.tex",
+  "variant_file": "data/resumes/variants/resume_Uber_kafka_administrator_6cabedb2.tex",
+  "compared_at": "2025-12-30T03:01:53.514130",
+  "metrics": {
+    "similarity_score": 0.2356198092894494,
+    "change_score": 76.43801907105507,
+    "has_significant_changes": true
+  },
+  "summary": {
+    "total_bullets_original": 11,
+    "total_bullets_new": 11,
+    "bullets_ai_enhanced": 0,
+    "bullets_modified": 1,
+    "bullets_added": 0,
+    "bullets_removed": 5,
+    "keywords_added": [
+      "cloud",
+      "demonstrated",
+      "developed",
+      "docker",
+      "enhanced",
+      "ensured",
+      "executed",
+      "expertise",
+      "focus",
+      "from"
+    ],
+    "change_summary": "10 keywords added, summary updated"
+  },
+  "section_changes": {
+    "summary": {
+      "change_type": "modified",
+      "word_count_delta": 0,
+      "keywords_added": [
+        "across",
+        "availability",
+        "cloud",
+        "confluent",
+        "connect",
+        "demonstrated",
+        "docker",
+        "ensuring",
+        "executed",
+        "expertise"
+      ],
+      "summary": "Modified (0 words removed), +10 keywords"
+    }
+  },
+  "bullet_changes": [
+    {
+      "change_type": "removed",
+      "original_text": "Implemented security controls with SSL/TLS and SASL authentication to ensure secure communication and access management across enterprise systems.",
+      "new_text": null,
+      "position_original": 3,
+      "position_new": null,
+      "keywords_added": [],
+      "similarity_score": 0.0
+    },
+    {
+      "change_type": "removed",
+      "original_text": "Performed Kafka upgrades and patching (versions 6.x and 7.x) with minimal downtime, ensuring high availability and stability.",
+      "new_text": null,
+      "position_original": 4,
+      "position_new": null,
+      "keywords_added": [],
+      "similarity_score": 0.0
+    },
+    {
+      "change_type": "removed",
+      "original_text": "Designed and maintained disaster recovery (DR) plans for business continuity in mission-critical deployments.",
+      "new_text": null,
+      "position_original": 5,
+      "position_new": null,
+      "keywords_added": [],
+      "similarity_score": 0.0
+    },
+    {
+      "change_type": "removed",
+      "original_text": "Configured and administered Kafka Connect (source & sink connectors) to integrate external systems with Kafka, ensuring reliable and scalable data streaming.",
+      "new_text": null,
+      "position_original": 6,
+      "position_new": null,
+      "keywords_added": [],
+      "similarity_score": 0.0
+    },
+    {
+      "change_type": "removed",
+      "original_text": "Automated Kafka operational tasks (user provisioning, topic creation, monitoring alerts) using Shell scripting and CI/CD pipelines.",
+      "new_text": null,
+      "position_original": 10,
+      "position_new": null,
+      "keywords_added": [],
+      "similarity_score": 0.0
+    }
+  ]
+}

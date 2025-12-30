@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ app_name }}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/htmx.min.js"></script>
+    <script defer src="/static/js/alpine.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="/" class="navbar-brand">🎯 {{ app_name }}</a>
+            
+            <ul class="navbar-menu">
+                <li><a href="/" class="{% if page == 'dashboard' %}active{% endif %}">Dashboard</a></li>
+                <li><a href="/jobs" class="{% if page == 'jobs' %}active{% endif %}">Jobs</a></li>
+                <li><a href="/generate" class="{% if page == 'generate' %}active{% endif %}">Generate</a></li>
+                <li>                <a href="/scraper" class="nav-link" :class="{'active': currentPath === '/scraper'}">
+                    🔍 Scrape Jobs
+                </a>
+                <a href="/settings" class="{% if page == 'settings' %}active{% endif %}">Settings</a></li>
+            </ul>
+            
+            <div class="navbar-actions">
+                <a href="/logout" class="btn btn-outline btn-sm">Logout</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="container" style="padding: 2rem 20px;">
+        {% block content %}{% endblock %}
+    </main>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block title %}Jobs - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div x-data="jobsData()">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-4">
+        <h1 style="font-size: 2rem; font-weight: bold;">Jobs</h1>
+        <button @click="showAddJobModal = true" class="btn btn-primary">+ Add Job</button>
+    </div>
+    
+    <!-- Filters -->
+    <div class="card mb-4">
+        <div class="flex gap-2">
+            <input 
+                type="text" 
+                x-model="searchQuery"
+                @input="filterJobs"
+                class="form-input" 
+                placeholder="Search jobs..."
+                style="max-width: 300px;"
+            >
+            <select x-model="statusFilter" @change="filterJobs" class="form-select" style="max-width: 200px;">
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="applied">Applied</option>
+                <option value="rejected">Rejected</option>
+                <option value="archived">Archived</option>
+            </select>
+        </div>
+    </div>
+    
+    <!-- Jobs List -->
+    <div x-show="filteredJobs.length === 0" class="card text-center" style="padding: 3rem;">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">📭</div>
+        <div style="font-size: 1.25rem; color: var(--gray);">No jobs found</div>
+        <button @click="showAddJobModal = true" class="btn btn-primary mt-2">Add Your First Job</button>
+    </div>
+    
+    <template x-for="job in filteredJobs" :key="job.job_id">
+        <div class="job-card">
+            <div class="job-header">
+                <div>
+                    <div class="job-title" x-text="job.job_title"></div>
+                    <div class="job-company" x-text="job.company"></div>
+                </div>
+                <div>
+                    <span 
+                        class="score-badge" 
+                        :class="utils.getScoreClass(job.best_ats_score)"
+                        x-show="job.best_ats_score > 0"
+                    >
+                        ATS: <span x-text="utils.formatScore(job.best_ats_score)"></span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="job-meta">
+                <div class="job-meta-item">
+                    <span>📄</span>
+                    <span x-text="job.variants_count + ' variants'"></span>
+                </div>
+                <div class="job-meta-item" x-show="job.location">
+                    <span>📍</span>
+                    <span x-text="job.location"></span>
+                </div>
+                <div class="job-meta-item" x-show="job.salary_range">
+                    <span>💰</span>
+                    <span x-text="job.salary_range"></span>
+                </div>
+                <div class="job-meta-item">
+                    <span>📅</span>
+                    <span x-text="'Added ' + utils.formatDate(job.created_at)"></span>
+                </div>
+            </div>
+            
+            <div class="job-actions">
+                <a :href="'/jobs/' + job.job_id" class="btn btn-outline btn-sm">View Details</a>
+                <a :href="'/generate?job_id=' + job.job_id" class="btn btn-primary btn-sm">Generate Variant</a>
+                <button @click="deleteJob(job.job_id)" class="btn btn-danger btn-sm">Delete</button>
+            </div>
+        </div>
+    </template>
+    
+    <!-- Add Job Modal -->
+    <div class="modal" :class="{ active: showAddJobModal }">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Job</h2>
+                <button @click="showAddJobModal = false" class="modal-close">&times;</button>
+            </div>
+            
+            <form @submit.prevent="addJob">
+                <div class="form-group">
+                    <label class="form-label">Company *</label>
+                    <input type="text" x-model="newJob.company" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Job Title *</label>
+                    <input type="text" x-model="newJob.job_title" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Job Description *</label>
+                    <textarea x-model="newJob.job_description" class="form-textarea" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Job URL</label>
+                    <input type="url" x-model="newJob.job_url" class="form-input">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input type="text" x-model="newJob.location" class="form-input">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Salary Range</label>
+                    <input type="text" x-model="newJob.salary_range" class="form-input" placeholder="e.g., $100k - $150k">
+                </div>
+                
+                <div class="flex gap-2">
+                    <button type="submit" class="btn btn-primary">Add Job</button>
+                    <button type="button" @click="showAddJobModal = false" class="btn btn-outline">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function jobsData() {
+    return {
+        jobs: [],
+        filteredJobs: [],
+        searchQuery: '',
+        statusFilter: '',
+        showAddJobModal: false,
+        newJob: {
+            company: '',
+            job_title: '',
+            job_description: '',
+            job_url: '',
+            location: '',
+            salary_range: ''
+        },
+        
+        init() {
+            this.loadJobs();
+        },
+        
+        async loadJobs() {
+            try {
+                const response = await fetch('/api/jobs/');
+                this.jobs = await response.json();
+                this.filteredJobs = this.jobs;
+            } catch (error) {
+                console.error('Failed to load jobs:', error);
+                utils.showToast('Failed to load jobs', 'error');
+            }
+        },
+        
+        filterJobs() {
+            this.filteredJobs = this.jobs.filter(job => {
+                const matchesSearch = !this.searchQuery || 
+                    job.job_title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                    job.company.toLowerCase().includes(this.searchQuery.toLowerCase());
+                
+                const matchesStatus = !this.statusFilter || job.status === this.statusFilter;
+                
+                return matchesSearch && matchesStatus;
+            });
+        },
+        
+        async addJob() {
+            try {
+                const formData = new FormData();
+                Object.keys(this.newJob).forEach(key => {
+                    formData.append(key, this.newJob[key]);
+                });
+                
+                const response = await fetch('/api/jobs/', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    utils.showToast('Job added successfully!', 'success');
+                    this.showAddJobModal = false;
+                    this.newJob = {
+                        company: '',
+                        job_title: '',
+                        job_description: '',
+                        job_url: '',
+                        location: '',
+                        salary_range: ''
+                    };
+                    this.loadJobs();
+                } else {
+                    utils.showToast('Failed to add job', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to add job:', error);
+                utils.showToast('Failed to add job', 'error');
+            }
+        },
+        
+        async deleteJob(jobId) {
+            if (!confirmDelete('Are you sure you want to delete this job? This will also delete all variants.')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/jobs/${jobId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    utils.showToast('Job deleted successfully', 'success');
+                    this.loadJobs();
+                } else {
+                    utils.showToast('Failed to delete job', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to delete job:', error);
+                utils.showToast('Failed to delete job', 'error');
+            }
+        }
+    }
+}
+</script>
+{% endblock %}

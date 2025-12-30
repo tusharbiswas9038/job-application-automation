@@ -1,0 +1,119 @@
+# scraper/processor/normalizer.py
+import logging
+from typing import List, Optional
+from langdetect import detect, LangDetectException
+
+from scraper.processor.config import get_config, ProcessorConfig
+from scraper.processor.models import NormalizedJob
+from scraper.processor.text_cleaner import TextCleaner
+from scraper.processor.date_parser import DateParser
+from scraper.processor.salary_extractor import SalaryExtractor
+from scraper.processor.location_normalizer import LocationNormalizer
+from scraper.processor.keyword_extractor import KeywordExtractor
+from scraper.models import RawJob
+
+logger = logging.getLogger(__name__)
+
+
+class JobNormalizer:
+    """Main normalizer orchestrating all normalization steps"""
+
+    def __init__(self, config: Optional[ProcessorConfig] = None):
+        self.config = config or get_config()
+        self.text_cleaner = TextCleaner()
+        self.date_parser = DateParser()
+        self.salary_extractor = SalaryExtractor()
+        
+        # Pass required parameters to LocationNormalizer
+        self.location_normalizer = LocationNormalizer(
+            us_states=self.config.us_states,
+            location_aliases=self.config.location_aliases
+        )
+        
+        # Pass required parameters to KeywordExtractor
+        self.keyword_extractor = KeywordExtractor(
+            required_keywords=self.config.required_keywords,
+            bonus_keywords=self.config.bonus_keywords
+        )
+
+    def normalize(self, raw_job: RawJob) -> NormalizedJob:
+        """
+        Normalize a raw job posting
+
+        Args:
+            raw_job: Raw job data from scraper
+
+        Returns:
+            NormalizedJob with cleaned, validated, and enriched data
+        """
+        logger.debug(f"Normalizing job: {raw_job.title} at {raw_job.company}")
+
+        # Clean text fields
+        title = self.text_cleaner.clean_title(raw_job.title)
+        company = self.text_cleaner.clean_company(raw_job.company)
+        description = self.text_cleaner.clean_description(raw_job.description or "")
+
+        # Parse location
+        location_parsed = self.location_normalizer.normalize_location(raw_job.location or "")
+        location = location_parsed.normalized or raw_job.location or "Remote"
+
+        # Parse posted date
+        posted_date = None
+        if raw_job.posted_date:
+            posted_date = self.date_parser.parse(raw_job.posted_date)
+
+        # Extract salary
+        salary_range = None
+        if raw_job.salary:
+            salary_range = self.salary_extractor.extract(raw_job.salary)
+
+        # Extract keywords and skills
+        keywords = self.keyword_extractor.extract_keywords(description, top_n=20)
+        required_skills = self.keyword_extractor.extract_skills(description)
+
+        # Detect language
+        language = self._detect_language(description)
+
+        # Build normalized job
+        normalized = NormalizedJob(
+            title=title,
+            company=company,
+            location=location,
+            description=description,
+            url=raw_job.url,
+            posted_date=posted_date,
+            salary_range=salary_range,
+            keywords=keywords,
+            required_skills=required_skills,
+            language=language,
+            source=raw_job.source
+        )
+
+        logger.debug(f"Normalized job: {normalized.title} | Location: {normalized.location}")
+        return normalized
+
+    def _detect_language(self, text: str) -> str:
+        """Detect language of job description"""
+        if not text or len(text.strip()) < 50:
+            return "en"
+
+        try:
+            lang = detect(text)
+            return lang if lang in ["en", "es", "fr", "de"] else "en"
+        except LangDetectException:
+            return "en"
+
+    def normalize_batch(self, raw_jobs: List[RawJob]) -> List[NormalizedJob]:
+        """Normalize multiple jobs"""
+        normalized_jobs = []
+
+        for raw_job in raw_jobs:
+            try:
+                normalized = self.normalize(raw_job)
+                normalized_jobs.append(normalized)
+            except Exception as e:
+                logger.error(f"Failed to normalize job {raw_job.url}: {e}")
+                continue
+
+        logger.info(f"Normalized {len(normalized_jobs)}/{len(raw_jobs)} jobs")
+        return normalized_jobs

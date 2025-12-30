@@ -1,0 +1,897 @@
+{
+  "variant_id": "4fd346a4-7b4b-43a7-8e82-1a93d7604d65",
+  "job_title": "Kafka Administrator",
+  "company": "Uber",
+  "latex_path": "data/resumes/variants/resume_Uber_kafka_administrator_4fd346a4.tex",
+  "pdf_path": "data/resumes/variants/resume_Uber_kafka_administrator_4fd346a4.pdf",
+  "bullets_enhanced": 5,
+  "keywords_added": [
+    "python",
+    "docker",
+    "cluster management",
+    "kafka",
+    "kubernetes",
+    "aws"
+  ],
+  "generated_at": "2025-12-30T04:07:14.604542",
+  "ats_score": {
+    "overall_score": 57.93076923076924,
+    "keyword_score": 35.69230769230772,
+    "experience_score": 75.0,
+    "education_score": 85.0,
+    "skills_score": 50.769230769230774,
+    "format_score": 100,
+    "matched_keywords": [
+      {
+        "keyword": {
+          "text": "kafka",
+          "category": "technical",
+          "importance": 1.0,
+          "synonyms": [
+            "apache kafka",
+            "confluent kafka",
+            "kafka streams"
+          ],
+          "context": "Kafka Administrator - Ube"
+        },
+        "match_type": "exact",
+        "matched_text": "kafka",
+        "locations": [
+          "summary",
+          "experience",
+          "skills"
+        ],
+        "frequency": 16,
+        "context_score": 0.8
+      },
+      {
+        "keyword": {
+          "text": "kubernetes",
+          "category": "technical",
+          "importance": 1.0,
+          "synonyms": [
+            "k8s",
+            "container orchestration"
+          ],
+          "context": "nerization (Docker, Kubernetes)\n• Proficiency in s"
+        },
+        "match_type": "exact",
+        "matched_text": "kubernetes",
+        "locations": [
+          "summary",
+          "experience",
+          "skills"
+        ],
+        "frequency": 7,
+        "context_score": 0.6
+      },
+      {
+        "keyword": {
+          "text": "docker",
+          "category": "technical",
+          "importance": 1.0,
+          "synonyms": [],
+          "context": "h containerization (Docker, Kubernetes)\n• Prof"
+        },
+        "match_type": "exact",
+        "matched_text": "docker",
+        "locations": [
+          "summary",
+          "experience",
+          "skills"
+        ],
+        "frequency": 7,
+        "context_score": 0.8
+      },
+      {
+        "keyword": {
+          "text": "python",
+          "category": "technical",
+          "importance": 1.0,
+          "synonyms": [],
+          "context": "ational tasks using Python, Bash, and infrastr"
+        },
+        "match_type": "exact",
+        "matched_text": "python",
+        "locations": [
+          "summary",
+          "experience"
+        ],
+        "frequency": 4,
+        "context_score": 0.8
+      },
+      {
+        "keyword": {
+          "text": "aws",
+          "category": "technical",
+          "importance": 1.0,
+          "synonyms": [],
+          "context": ", or Apache Flink\n• AWS, Azure, or GCP clou"
+        },
+        "match_type": "exact",
+        "matched_text": "aws",
+        "locations": [
+          "summary",
+          "experience"
+        ],
+        "frequency": 7,
+        "context_score": 0.8
+      },
+      {
+        "keyword": {
+          "text": "jenkins",
+          "category": "technical",
+          "importance": 1.0,
+          "synonyms": [],
+          "context": ")\n• Experience with CI/CD pipelines and autom"
+        },
+        "match_type": "exact",
+        "matched_text": "jenkins",
+        "locations": [
+          "skills"
+        ],
+        "frequency": 1,
+        "context_score": 0.0
+      },
+      {
+        "keyword": {
+          "text": "azure",
+          "category": "technical",
+          "importance": 0.9,
+          "synonyms": [],
+          "context": "Apache Flink\n• AWS, Azure, or GCP cloud platf"
+        },
+        "match_type": "exact",
+        "matched_text": "azure",
+        "locations": [],
+        "frequency": 1,
+        "context_score": 0.3
+      },
+      {
+        "keyword": {
+          "text": "git",
+          "category": "technical",
+          "importance": 0.9,
+          "synonyms": [],
+          "context": " Datadog\n• Jenkins, GitLab CI/CD\n• Python, Bas"
+        },
+        "match_type": "exact",
+        "matched_text": "git",
+        "locations": [
+          "skills"
+        ],
+        "frequency": 1,
+        "context_score": 0.0
+      },
+      {
+        "keyword": {
+          "text": "kafka administrator",
+          "category": "domain",
+          "importance": 0.8,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "exact",
+        "matched_text": "kafka administrator",
+        "locations": [
+          "experience"
+        ],
+        "frequency": 1,
+        "context_score": 0.3
+      },
+      {
+        "keyword": {
+          "text": "cluster management",
+          "category": "domain",
+          "importance": 0.8,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "exact",
+        "matched_text": "cluster management",
+        "locations": [
+          "experience"
+        ],
+        "frequency": 1,
+        "context_score": 0.0
+      },
+      {
+        "keyword": {
+          "text": "disaster recovery",
+          "category": "domain",
+          "importance": 0.8,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "exact",
+        "matched_text": "disaster recovery",
+        "locations": [
+          "experience"
+        ],
+        "frequency": 1,
+        "context_score": 0.3
+      },
+      {
+        "keyword": {
+          "text": "performance tuning",
+          "category": "domain",
+          "importance": 0.8,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "exact",
+        "matched_text": "performance tuning",
+        "locations": [
+          "skills"
+        ],
+        "frequency": 1,
+        "context_score": 0.0
+      },
+      {
+        "keyword": {
+          "text": "security",
+          "category": "domain",
+          "importance": 0.8,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "stemmed",
+        "matched_text": "secure",
+        "locations": [
+          "experience"
+        ],
+        "frequency": 1,
+        "context_score": 0.0
+      },
+      {
+        "keyword": {
+          "text": "monitoring",
+          "category": "domain",
+          "importance": 0.8,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "exact",
+        "matched_text": "monitoring",
+        "locations": [
+          "experience"
+        ],
+        "frequency": 1,
+        "context_score": 0.0
+      },
+      {
+        "keyword": {
+          "text": "replication",
+          "category": "domain",
+          "importance": 0.8,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "exact",
+        "matched_text": "replication",
+        "locations": [
+          "skills"
+        ],
+        "frequency": 1,
+        "context_score": 0.0
+      },
+      {
+        "keyword": {
+          "text": "partitioning",
+          "category": "domain",
+          "importance": 0.8,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "stemmed",
+        "matched_text": "partition",
+        "locations": [
+          "experience"
+        ],
+        "frequency": 1,
+        "context_score": 0.0
+      },
+      {
+        "keyword": {
+          "text": "prometheus grafana",
+          "category": "domain",
+          "importance": 0.4,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "exact",
+        "matched_text": "prometheus grafana",
+        "locations": [
+          "skills"
+        ],
+        "frequency": 1,
+        "context_score": 0.0
+      },
+      {
+        "keyword": {
+          "text": "Communication",
+          "category": "soft_skill",
+          "importance": 0.5,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "exact",
+        "matched_text": "Communication",
+        "locations": [
+          "experience"
+        ],
+        "frequency": 1,
+        "context_score": 0.3
+      },
+      {
+        "keyword": {
+          "text": "Troubleshooting",
+          "category": "soft_skill",
+          "importance": 0.5,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "exact",
+        "matched_text": "Troubleshooting",
+        "locations": [
+          "experience"
+        ],
+        "frequency": 1,
+        "context_score": 0.0
+      },
+      {
+        "keyword": {
+          "text": "Documentation",
+          "category": "soft_skill",
+          "importance": 0.5,
+          "synonyms": [],
+          "context": null
+        },
+        "match_type": "exact",
+        "matched_text": "Documentation",
+        "locations": [
+          "experience"
+        ],
+        "frequency": 1,
+        "context_score": 0.3
+      }
+    ],
+    "missing_keywords": [
+      {
+        "text": "terraform",
+        "category": "technical",
+        "importance": 1.0,
+        "synonyms": [],
+        "context": "e\n• Experience with Terraform, Ansible, or simila"
+      },
+      {
+        "text": "ansible",
+        "category": "technical",
+        "importance": 1.0,
+        "synonyms": [],
+        "context": "nce with Terraform, Ansible, or similar IaC too"
+      },
+      {
+        "text": "Confluent Certified",
+        "category": "certification",
+        "importance": 0.9,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "for data",
+        "category": "technical",
+        "importance": 0.6,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "grafana datadog",
+        "category": "technical",
+        "importance": 0.4,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "prometheus grafana datadog",
+        "category": "technical",
+        "importance": 0.4,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "apache kafka",
+        "category": "domain",
+        "importance": 0.8,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "python bash",
+        "category": "domain",
+        "importance": 0.6,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "monitoring and",
+        "category": "domain",
+        "importance": 0.4,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "kafka confluent",
+        "category": "domain",
+        "importance": 0.4,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "confluent platform",
+        "category": "domain",
+        "importance": 0.4,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "replication and",
+        "category": "domain",
+        "importance": 0.4,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "terraform ansible",
+        "category": "domain",
+        "importance": 0.4,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "hybrid office",
+        "category": "domain",
+        "importance": 0.4,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "apache kafka confluent",
+        "category": "domain",
+        "importance": 0.4,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "kafka confluent platform",
+        "category": "domain",
+        "importance": 0.4,
+        "synonyms": [],
+        "context": null
+      },
+      {
+        "text": "experience with",
+        "category": "experience",
+        "importance": 1.0,
+        "synonyms": [],
+        "context": null
+      }
+    ],
+    "section_scores": {
+      "summary": {
+        "section_name": "summary",
+        "keyword_matches": 5,
+        "total_keywords": 32,
+        "match_rate": 0.15625,
+        "density": 7.462686567164178,
+        "quality_score": 100.0,
+        "suggestions": [
+          "Add more relevant keywords to summary"
+        ]
+      },
+      "experience": {
+        "section_name": "experience",
+        "keyword_matches": 14,
+        "total_keywords": 32,
+        "match_rate": 0.4375,
+        "density": 6.0606060606060606,
+        "quality_score": 97.14285714285715,
+        "suggestions": []
+      },
+      "skills": {
+        "section_name": "skills",
+        "keyword_matches": 8,
+        "total_keywords": 32,
+        "match_rate": 0.25,
+        "density": 25.806451612903224,
+        "quality_score": 100.0,
+        "suggestions": [
+          "Add more relevant keywords to skills"
+        ]
+      },
+      "education": {
+        "section_name": "education",
+        "keyword_matches": 0,
+        "total_keywords": 32,
+        "match_rate": 0.0,
+        "density": 0.0,
+        "quality_score": 0,
+        "suggestions": [
+          "Add more relevant keywords to education"
+        ]
+      }
+    },
+    "total_keywords": 37,
+    "matched_count": 20,
+    "match_rate": 0.5405405405405406,
+    "critical_gaps": [
+      "Add 'terraform' - appears 10 times in JD",
+      "Add 'ansible' - appears 10 times in JD",
+      "Add 'Confluent Certified' - appears 9 times in JD",
+      "Add 'apache kafka' - appears 8 times in JD",
+      "Add 'experience with' - appears 10 times in JD"
+    ],
+    "improvements": [
+      "Strengthen 'security' - currently matched as 'secure'",
+      "Strengthen 'partitioning' - currently matched as 'partition'",
+      "Use 'jenkins' more frequently - currently only appears once",
+      "Use 'azure' more frequently - currently only appears once",
+      "Use 'git' more frequently - currently only appears once"
+    ],
+    "enhancements": [
+      "Consider adding 'grafana datadog' to boost relevance",
+      "Consider adding 'prometheus grafana datadog' to boost relevance",
+      "Consider adding 'monitoring and' to boost relevance",
+      "Consider adding 'kafka confluent' to boost relevance",
+      "Consider adding 'confluent platform' to boost relevance"
+    ],
+    "job_title": "Kafka Administrator - Uber Technologies",
+    "scored_at": "2025-12-30T04:07:14.600245"
+  },
+  "content": {
+    "summary": "Managed and supported Kafka clusters across multiple environments including Dev, QA, UAT, and Production, ensuring seamless operations and high availability. Executed successful Kafka upgrades from versions 6.x to 7.x on Kubernetes using Docker, while leveraging Confluent Kafka, Apache Zookeeper, and Kafka Streams for robust data processing. Demonstrated expertise in integrating with AWS services and implementing advanced features like Kafka Connect, ksqlDB, and Schema Registry through Python scripting.",
+    "experience_sections": [
+      {
+        "experience": {
+          "title": "Kafka Administrator - Cloud & Infra",
+          "company": "LTIMindtree Limited",
+          "location": "Pune, India",
+          "start_date": "July 2022",
+          "end_date": "Present",
+          "bullets": [
+            {
+              "id": "ltimindtree_limited_0",
+              "text": "Managed and supported Confluent and Apache Kafka clusters across multiple environments (Dev, QA, UAT, and Production), including setup, configuration, scaling, and maintenance.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            {
+              "id": "ltimindtree_limited_1",
+              "text": "Streamlined broker, topic, and partition configurations to achieve high throughput and low latency for business-critical data pipelines.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            {
+              "id": "ltimindtree_limited_2",
+              "text": "Proactively monitored cluster health, broker performance, and consumer lag using Prometheus/Grafana, resolving bottlenecks to ensure SLA compliance.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            {
+              "id": "ltimindtree_limited_3",
+              "text": "Implemented security controls with SSL/TLS and SASL authentication to ensure secure communication and access management across enterprise systems.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            {
+              "id": "ltimindtree_limited_4",
+              "text": "Performed Kafka upgrades and patching (versions 6.x and 7.x) with minimal downtime, ensuring high availability and stability.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            {
+              "id": "ltimindtree_limited_5",
+              "text": "Designed and maintained disaster recovery (DR) plans for business continuity in mission-critical deployments.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            {
+              "id": "ltimindtree_limited_6",
+              "text": "Configured and administered Kafka Connect (source & sink connectors) to integrate external systems with Kafka, ensuring reliable and scalable data streaming.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            {
+              "id": "ltimindtree_limited_7",
+              "text": "Worked with ksqlDB and Schema Registry for real-time stream processing, schema evolution, and governance.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            {
+              "id": "ltimindtree_limited_8",
+              "text": "Collaborated with developers, application teams, and stakeholders to design and optimize data streaming solutions.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            {
+              "id": "ltimindtree_limited_9",
+              "text": "Created and maintained operational runbooks, documentation, and troubleshooting guides, enabling efficient cross-team support.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            {
+              "id": "ltimindtree_limited_10",
+              "text": "Automated Kafka operational tasks (user provisioning, topic creation, monitoring alerts) using Shell scripting and CI/CD pipelines.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            }
+          ],
+          "is_current": false,
+          "line_number": null
+        },
+        "selected_bullets": [
+          {
+            "bullet": {
+              "id": "ltimindtree_limited_0",
+              "text": "Managed and supported Confluent and Apache Kafka clusters across multiple environments (Dev, QA, UAT, and Production), including setup, configuration, scaling, and maintenance.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            "relevance_score": 0.46,
+            "selection_reason": "Matches keywords: kafka",
+            "was_enhanced": true,
+            "enhanced_version": "Managed and supported Kafka clusters across Dev, QA, UAT, and Production environments, including setup, configuration, scaling, and maintenance on Kubernetes with Docker; integrated AWS services [X] for enhanced reliability."
+          },
+          {
+            "bullet": {
+              "id": "ltimindtree_limited_4",
+              "text": "Performed Kafka upgrades and patching (versions 6.x and 7.x) with minimal downtime, ensuring high availability and stability.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            "relevance_score": 0.43,
+            "selection_reason": "Matches keywords: kafka; Contains quantifiable results",
+            "was_enhanced": true,
+            "enhanced_version": "Executed Kafka upgrades (versions 6.x-7.x) and patching on Kubernetes using Docker, ensuring high availability with minimal downtime [X]. Integrated AWS services for enhanced stability."
+          },
+          {
+            "bullet": {
+              "id": "ltimindtree_limited_3",
+              "text": "Implemented security controls with SSL/TLS and SASL authentication to ensure secure communication and access management across enterprise systems.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            "relevance_score": 0.38,
+            "selection_reason": "Strong action verb",
+            "was_enhanced": true,
+            "enhanced_version": "Implemented secure communication and access management using SSL/TLS and SASL authentication in enterprise systems; integrated Kafka with Kubernetes and Docker for scalable messaging, leveraging Python scripts on AWS."
+          },
+          {
+            "bullet": {
+              "id": "ltimindtree_limited_5",
+              "text": "Designed and maintained disaster recovery (DR) plans for business continuity in mission-critical deployments.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            "relevance_score": 0.38,
+            "selection_reason": "Strong action verb",
+            "was_enhanced": true,
+            "enhanced_version": "Designed and maintained disaster recovery plans for mission-critical Kafka deployments on Kubernetes, utilizing Docker and Python scripts with AWS integration [X]."
+          },
+          {
+            "bullet": {
+              "id": "ltimindtree_limited_10",
+              "text": "Automated Kafka operational tasks (user provisioning, topic creation, monitoring alerts) using Shell scripting and CI/CD pipelines.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            "relevance_score": 0.38,
+            "selection_reason": "Matches keywords: kafka; Strong action verb",
+            "was_enhanced": true,
+            "enhanced_version": "Automated Kafka operational tasks (user provisioning, topic creation, monitoring alerts) using Shell scripting and CI/CD pipelines; integrated Kubernetes and Docker for cluster management, enhanced with Python scripts for AWS integration."
+          },
+          {
+            "bullet": {
+              "id": "ltimindtree_limited_6",
+              "text": "Configured and administered Kafka Connect (source & sink connectors) to integrate external systems with Kafka, ensuring reliable and scalable data streaming.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            "relevance_score": 0.23000000000000004,
+            "selection_reason": "Matches keywords: kafka",
+            "was_enhanced": false,
+            "enhanced_version": null
+          },
+          {
+            "bullet": {
+              "id": "ltimindtree_limited_1",
+              "text": "Streamlined broker, topic, and partition configurations to achieve high throughput and low latency for business-critical data pipelines.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            "relevance_score": 0.15000000000000002,
+            "selection_reason": "Relevant to role",
+            "was_enhanced": false,
+            "enhanced_version": null
+          },
+          {
+            "bullet": {
+              "id": "ltimindtree_limited_2",
+              "text": "Proactively monitored cluster health, broker performance, and consumer lag using Prometheus/Grafana, resolving bottlenecks to ensure SLA compliance.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            "relevance_score": 0.15000000000000002,
+            "selection_reason": "Relevant to role",
+            "was_enhanced": false,
+            "enhanced_version": null
+          },
+          {
+            "bullet": {
+              "id": "ltimindtree_limited_7",
+              "text": "Worked with ksqlDB and Schema Registry for real-time stream processing, schema evolution, and governance.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            "relevance_score": 0.15000000000000002,
+            "selection_reason": "Relevant to role",
+            "was_enhanced": false,
+            "enhanced_version": null
+          },
+          {
+            "bullet": {
+              "id": "ltimindtree_limited_8",
+              "text": "Collaborated with developers, application teams, and stakeholders to design and optimize data streaming solutions.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            "relevance_score": 0.15000000000000002,
+            "selection_reason": "Relevant to role",
+            "was_enhanced": false,
+            "enhanced_version": null
+          },
+          {
+            "bullet": {
+              "id": "ltimindtree_limited_9",
+              "text": "Created and maintained operational runbooks, documentation, and troubleshooting guides, enabling efficient cross-team support.",
+              "section": "experience",
+              "subsection": "LTIMindtree Limited",
+              "is_modifiable": true,
+              "original_text": null,
+              "command_name": null,
+              "line_number": null
+            },
+            "relevance_score": 0.15000000000000002,
+            "selection_reason": "Relevant to role",
+            "was_enhanced": false,
+            "enhanced_version": null
+          }
+        ],
+        "total_available": 11
+      }
+    ],
+    "skills": {
+      "technical": [
+        "Confluent Kafka",
+        "Kafka Streams",
+        "Kafka Connect",
+        "Apache Zookeeper",
+        "ksqlDB",
+        "Schema Registry",
+        "Shell",
+        "Kafka",
+        "Kubernetes",
+        "Docker",
+        "Python",
+        "Aws",
+        "Terraform",
+        "Jenkins",
+        "Git"
+      ],
+      "tools": [
+        "Grafana",
+        "Jenkins",
+        "Docker",
+        "Git",
+        "Kubernetes",
+        "Performance Tuning",
+        "Prometheus",
+        "Data Replication",
+        "Cluster Scaling",
+        "SSL/TLS",
+        "SASL",
+        "Kerberos",
+        "AppDynamics",
+        "Splunk",
+        "Linux",
+        "ServiceNow"
+      ],
+      "languages": []
+    },
+    "total_bullets": 11
+  }
+}

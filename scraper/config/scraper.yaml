@@ -1,0 +1,28 @@
+# config/scraper.yaml
+scraper:
+  # Rate limiting
+  request_delay: 2.5
+  max_retries: 3
+  backoff_factor: 2.0
+  timeout: 30
+  
+  # LinkedIn settings
+  linkedin_pages: 8  # 8 pages = 200 jobs
+  
+  # Search queries for Kafka roles
+  search_queries:
+    - keywords: "Kafka Administrator"
+      location: "United States"
+    - keywords: "Kafka Platform Engineer"
+      location: "United States"
+    - keywords: "Apache Kafka Infrastructure"
+      location: "Remote"
+    - keywords: "Kafka Site Reliability Engineer"
+      location: "United States"
+    - keywords: "Streaming Platform Engineer"
+      location: "United States"
+  
+  # Storage paths
+  cache_dir: "data/cache"
+  log_dir: "data/logs"
+

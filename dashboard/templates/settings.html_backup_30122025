@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}Settings - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div x-data="settingsData()">
+    <h1 style="font-size: 2rem; font-weight: bold; margin-bottom: 2rem;">Settings</h1>
+    
+    <div style="max-width: 800px;">
+        <!-- Ollama Settings -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Ollama Configuration</h2>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Ollama Host</label>
+                <input type="text" x-model="ollamaHost" class="form-input" readonly>
+                <div style="font-size: 0.875rem; color: var(--gray); margin-top: 0.5rem;">
+                    Current: {{ settings.ollama_host }}
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Model</label>
+                <input type="text" x-model="ollamaModel" class="form-input" readonly>
+                <div style="font-size: 0.875rem; color: var(--gray); margin-top: 0.5rem;">
+                    Current: {{ settings.ollama_model }}
+                </div>
+            </div>
+            
+            <button @click="testOllama" class="btn btn-primary" :disabled="testing">
+                <span x-show="!testing">Test Connection</span>
+                <span x-show="testing">Testing...</span>
+            </button>
+            
+            <div x-show="ollamaStatus" class="mt-2" style="margin-top: 1rem;">
+                <div :class="'alert alert-' + (ollamaConnected ? 'success' : 'error')" x-text="ollamaStatus"></div>
+            </div>
+        </div>
+        
+        <!-- Generation Defaults -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2 class="card-title">Generation Defaults</h2>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Default Target Bullets</label>
+                <input type="number" value="{{ settings.default_target_bullets }}" class="form-input" readonly>
+            </div>
+            
+            <div class="form-group">
+                <div class="form-checkbox">
+                    <input type="checkbox" {{ 'checked' if settings.default_ai_enhancement else '' }} disabled>
+                    <label>Enable AI Enhancement by Default</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- File Locations -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2 class="card-title">File Locations</h2>
+            </div>
+            
+            <div style="font-family: monospace; font-size: 0.875rem; line-height: 2;">
+                <div><strong>Resumes:</strong> data/resumes/</div>
+                <div><strong>Variants:</strong> data/resumes/variants/</div>
+                <div><strong>Job Descriptions:</strong> data/job_descriptions/</div>
+                <div><strong>Database:</strong> data/resume_tracker.db</div>
+            </div>
+        </div>
+        
+        <!-- Data Management -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2 class="card-title">Data Management</h2>
+            </div>
+            
+            <div class="flex gap-2">
+                <a href="/api/files/export/database" class="btn btn-primary" download>
+                    💾 Export Database
+                </a>
+                <button @click="clearOldVariants" class="btn btn-outline">
+                    🗑️ Clear Old Variants (30+ days)
+                </button>
+            </div>
+            
+            <div style="margin-top: 1rem; padding: 1rem; background: var(--light-gray); border-radius: 0.375rem;">
+                <div style="font-size: 0.875rem; color: var(--gray);">
+                    💡 <strong>Tip:</strong> Export creates a complete JSON backup of all jobs, variants, and statistics.
+                </div>
+            </div>
+        </div>
+        
+        <!-- About -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2 class="card-title">About</h2>
+            </div>
+            
+            <div style="line-height: 2;">
+                <div><strong>Version:</strong> 1.0.0</div>
+                <div><strong>Dashboard:</strong> FastAPI + Alpine.js</div>
+                <div><strong>AI Engine:</strong> Ollama ({{ settings.ollama_model }})</div>
+                <div><strong>Database:</strong> SQLite with WAL mode</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function settingsData() {
+    return {
+        ollamaHost: '{{ settings.ollama_host }}',
+        ollamaModel: '{{ settings.ollama_model }}',
+        ollamaStatus: '',
+        ollamaConnected: false,
+        testing: false,
+        
+        async testOllama() {
+            this.testing = true;
+            this.ollamaStatus = 'Testing connection...';
+            this.ollamaConnected = false;
+            
+            try {
+                // Try to connect to Ollama API
+                const response = await fetch(this.ollamaHost + '/api/tags', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const models = data.models || [];
+                    
+                    this.ollamaConnected = true;
+                    this.ollamaStatus = `✓ Connected successfully! Found ${models.length} model(s): ${models.map(m => m.name).join(', ') || 'None'}`;
+                } else {
+                    this.ollamaConnected = false;
+                    this.ollamaStatus = `✗ Failed to connect (Status: ${response.status})`;
+                }
+            } catch (error) {
+                this.ollamaConnected = false;
+                
+                // Check if it's a CORS error
+                if (error.message.includes('Failed to fetch')) {
+                    this.ollamaStatus = '✗ Connection failed. Possible issues:\n' +
+                        '1. Ollama is not running on ' + this.ollamaHost + '\n' +
+                        '2. CORS is blocking the request (check from server)\n' +
+                        '3. Network/firewall issues';
+                } else {
+                    this.ollamaStatus = '✗ Error: ' + error.message;
+                }
+            } finally {
+                this.testing = false;
+            }
+        },
+        
+        async clearOldVariants() {
+            if (!confirmDelete('Delete all variants older than 30 days?')) return;
+            
+            try {
+                // Count old variants
+                const response = await fetch('/api/files/variants');
+                const variants = await response.json();
+                
+                const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+                const oldVariants = variants.filter(v => v.modified * 1000 < thirtyDaysAgo);
+                
+                if (oldVariants.length === 0) {
+                    utils.showToast('No old variants found', 'warning');
+                    return;
+                }
+                
+                // Delete old variants
+                let deleted = 0;
+                for (const variant of oldVariants) {
+                    try {
+                        await fetch(`/api/files/variants/${variant.name}`, {
+                            method: 'DELETE'
+                        });
+                        deleted++;
+                    } catch (e) {
+                        console.error('Failed to delete:', variant.name);
+                    }
+                }
+                
+                utils.showToast(`Deleted ${deleted} old variant(s)`, 'success');
+            } catch (error) {
+                utils.showToast('Failed to clear variants: ' + error.message, 'error');
+            }
+        }
+    }
+}
+</script>
+{% endblock %}

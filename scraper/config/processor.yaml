@@ -1,0 +1,39 @@
+# config/processor.yaml
+processor:
+  # Deduplication
+  fuzzy_threshold: 90  # 90-95% for tight matching
+  use_fuzzy_matching: true
+  
+  # Text normalization
+  unicode_normalization: "NFC"  # Preserve information
+  remove_html: true
+  convert_to_markdown: true
+  max_description_length: 50000
+  min_description_length: 100
+  
+  # Language detection
+  detect_language: true
+  allowed_languages:
+    - en
+  
+  # Location normalization
+  normalize_locations: true
+  use_geocoding: false
+  
+  # Kafka keywords
+  required_keywords:
+    - kafka
+    - apache kafka
+    - event streaming
+    - message broker
+  
+  bonus_keywords:
+    - zookeeper
+    - schema registry
+    - kafka connect
+    - ksql
+    - kafka streams
+    - confluent
+    - broker
+    - partition
+

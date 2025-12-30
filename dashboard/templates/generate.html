@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Generate Variant - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div x-data="generateData()">
+    <h1 style="font-size: 2rem; font-weight: bold; margin-bottom: 2rem;">Generate Resume Variant</h1>
+    
+    <div style="max-width: 800px;">
+        <!-- Generation Form -->
+        <div class="card" x-show="!generating">
+            <form @submit.prevent="startGeneration">
+                <div class="form-group">
+                    <label class="form-label">Company *</label>
+                    <input type="text" x-model="form.company" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Job Title *</label>
+                    <input type="text" x-model="form.job_title" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Job Description *</label>
+                    <textarea x-model="form.job_description" class="form-textarea" rows="10" required></textarea>
+                    <div style="font-size: 0.875rem; color: var(--gray); margin-top: 0.5rem;">
+                        Paste the complete job description here
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Target Bullets</label>
+                    <input type="number" x-model="form.target_bullets" class="form-input" min="5" max="30" value="18">
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-checkbox">
+                        <input type="checkbox" x-model="form.use_ai" id="use_ai">
+                        <label for="use_ai">Use AI Enhancement (recommended)</label>
+                    </div>
+                    <div style="font-size: 0.875rem; color: var(--gray); margin-top: 0.25rem; margin-left: 1.5rem;">
+                        AI will enhance your bullets to match job requirements
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Upload Resume (Optional)</label>
+                    <input type="file" @change="handleFileUpload" accept=".tex" class="form-input">
+                    <div style="font-size: 0.875rem; color: var(--gray); margin-top: 0.5rem;">
+                        Leave empty to use your default resume
+                    </div>
+                </div>
+                
+                <div class="flex gap-2">
+                    <button type="submit" class="btn btn-primary">Generate Variant</button>
+                    <a href="/jobs" class="btn btn-outline">Cancel</a>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Progress Indicator -->
+        <div class="card" x-show="generating">
+            <div style="text-align: center; padding: 2rem;">
+                <div class="loading" style="width: 50px; height: 50px; margin: 0 auto 1rem;"></div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Generating Your Resume...</h3>
+                <p style="color: var(--gray); margin-bottom: 2rem;" x-text="progressMessage"></p>
+                
+                <div class="progress" style="margin-bottom: 1rem;">
+                    <div id="progress-bar" class="progress-bar" :style="'width: ' + progress + '%'"></div>
+                </div>
+                
+                <div style="font-size: 0.875rem; color: var(--gray);">
+                    <span x-text="progress"></span>% complete
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function generateData() {
+    return {
+        form: {
+            company: '',
+            job_title: '',
+            job_description: '',
+            target_bullets: 18,
+            use_ai: true,
+            resume_file: null
+        },
+        generating: false,
+        progress: 0,
+        progressMessage: 'Starting...',
+        taskId: null,
+        
+        handleFileUpload(event) {
+            this.form.resume_file = event.target.files[0];
+        },
+        
+        async startGeneration() {
+            this.generating = true;
+            this.progress = 0;
+            this.progressMessage = 'Starting generation...';
+            
+            try {
+                const formData = new FormData();
+                formData.append('company', this.form.company);
+                formData.append('job_title', this.form.job_title);
+                formData.append('job_description', this.form.job_description);
+                formData.append('target_bullets', this.form.target_bullets);
+                formData.append('use_ai', this.form.use_ai);
+                
+                if (this.form.resume_file) {
+                    formData.append('resume_file', this.form.resume_file);
+                }
+                
+                const response = await fetch('/api/generate/start', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    this.taskId = result.task_id;
+                    this.trackProgress();
+                } else {
+                    throw new Error('Failed to start generation');
+                }
+            } catch (error) {
+                console.error('Generation failed:', error);
+                utils.showToast('Failed to start generation', 'error');
+                this.generating = false;
+            }
+        },
+        
+        trackProgress() {
+            const eventSource = new EventSource(`/api/generate/stream/${this.taskId}`);
+            
+            eventSource.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                
+                this.progress = data.progress;
+                this.progressMessage = data.message;
+                
+                if (data.status === 'completed') {
+                    eventSource.close();
+                    utils.showToast('Variant generated successfully!', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = '/jobs';
+                    }, 1500);
+                }
+                
+                if (data.status === 'failed') {
+                    eventSource.close();
+                    utils.showToast('Generation failed: ' + data.error, 'error');
+                    this.generating = false;
+                }
+            };
+            
+            eventSource.onerror = () => {
+                eventSource.close();
+                utils.showToast('Connection lost', 'error');
+                this.generating = false;
+            };
+        }
+    }
+}
+</script>
+{% endblock %}

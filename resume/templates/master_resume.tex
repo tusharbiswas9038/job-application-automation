@@ -1,0 +1,158 @@
+% resume/templates/master_resume.tex
+%---
+% name: Your Name
+% target_role: Kafka Administrator
+% version: 1.0.0
+% tags: [kafka, devops, platform-engineering]
+% ---
+
+%-------------------------
+% Resume in Latex
+%------------------------
+
+\documentclass[letterpaper,10pt]{article} % removed 10.99pt (invalid option)
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-6pt}\bfseries\large % removed \scshape (caused font warning)
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+\pdfgentounicode=1
+
+% Custom commands
+\newcommand{\resumeItem}[1]{\item\small{{#1}}}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-6pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-7pt}} % tightened
+
+%-------------------------------------------
+\begin{document}
+\setlength{\footskip}{12pt} % increased to fix warning
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \bfseries Tushar Biswas} \\[4pt]
+    {\large \textbf{Kafka Administrator}} \\[6pt]
+    +91 8240926092 \,|\, 
+    \href{mailto:tusharbiswas9038@gmail.com}{\underline{tusharbiswas9038@gmail.com}} \,|\, 
+    \href{https://www.linkedin.com/in/biswastushar1/}{\underline{linkedin.com/in/biswastushar1/}} \,|\, 
+    \href{https://github.com/tusharbiswas9038}{\underline{github.com/tusharbiswas9038}}
+\end{center}
+
+
+
+%-----------SUMMARY-----------
+\section*{Summary}
+Motivated and detail-oriented Kafka Administrator with 3+ years of experience managing distributed systems in production. Skilled in installing, configuring, and maintaining Apache Kafka clusters, including managing topics, partitions, replication, and access controls. Experienced in CI/CD pipelines, automation, and monitoring, with a proven record of improving reliability, reducing downtime, and optimizing performance. Adept at implementing security best practices and supporting mission-critical applications in dynamic enterprise environments.
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in]
+    \item \textbf{Kafka Ecosystem:} Confluent Kafka, Apache Zookeeper, Kafka Streams, Kafka Connect, ksqlDB, Schema Registry
+    \item \textbf{DevOps Tools:} Jenkins, Docker, Git, Kubernetes
+    \item \textbf{Cluster Management:} Cluster Scaling, Performance Tuning, Data Replication
+    \item \textbf{Security:} SSL/TLS, SASL, Kerberos
+    \item \textbf{Monitoring Tools:} AppDynamics, Splunk, Prometheus, Grafana
+    \item \textbf{Scripting:} Shell
+    \item \textbf{Platform:} Linux
+    \item \textbf{Ticketing Tool:} ServiceNow
+\end{itemize}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Kafka Administrator - Cloud \& Infra}{July 2022 -- Present}
+      {LTIMindtree Limited}{Pune, India}
+      \resumeItemListStart
+      \resumeItem{Managed and supported Confluent and Apache Kafka clusters across multiple environments (Dev, QA, UAT, and Production), including setup, configuration, scaling, and maintenance.}
+      \resumeItem{Streamlined broker, topic, and partition configurations to achieve high throughput and low latency for business-critical data pipelines.}
+      \resumeItem{Proactively monitored cluster health, broker performance, and consumer lag using Prometheus/Grafana, resolving bottlenecks to ensure SLA compliance.}
+      \resumeItem{Implemented security controls with SSL/TLS and SASL authentication to ensure secure communication and access management across enterprise systems.}
+      \resumeItem{Performed Kafka upgrades and patching (versions 6.x and 7.x) with minimal downtime, ensuring high availability and stability.}
+      \resumeItem{Designed and maintained disaster recovery (DR) plans for business continuity in mission-critical deployments.}
+      \resumeItem{Configured and administered Kafka Connect (source \& sink connectors) to integrate external systems with Kafka, ensuring reliable and scalable data streaming.}
+      \resumeItem{Worked with ksqlDB and Schema Registry for real-time stream processing, schema evolution, and governance.}
+      \resumeItem{Collaborated with developers, application teams, and stakeholders to design and optimize data streaming solutions.}
+      \resumeItem{Created and maintained operational runbooks, documentation, and troubleshooting guides, enabling efficient cross-team support.}
+      \resumeItem{Automated Kafka operational tasks (user provisioning, topic creation, monitoring alerts) using Shell scripting and CI/CD pipelines.}
+    \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \footnotesize{
+     \item \textbf{Cloud Practitioner - AWS} (Issued Jun 2025 · Expires Jun 2028) \\
+     \item \textbf{Azure Fundamentals - Microsoft} (Issued Sep 2022)
+    }
+ \end{itemize}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Technique Polytechnic Institute}{Hooghly, India}
+      {Diploma in Computer Science and Technology}{2019 -- 2022}
+     \resumeSubheading
+     {Uttarpara Govt. High School}{Hooghly, India}
+     {Higher Secondary Certificate (Commerce)}{2017 -- 2019}
+  \resumeSubHeadingListEnd
+
+%-------------------------------------------
+\end{document}
+

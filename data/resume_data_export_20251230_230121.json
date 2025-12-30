@@ -1,0 +1,88 @@
+{
+  "exported_at": "2025-12-30T23:01:21.031492",
+  "statistics": {
+    "total_jobs": 1,
+    "total_variants": 2,
+    "total_applications": 0,
+    "applications_by_status": {},
+    "avg_ats_score": 56.32
+  },
+  "jobs": [
+    {
+      "job_id": 1,
+      "company": "Uber",
+      "job_title": "Kafka Administrator",
+      "job_url": null,
+      "job_description": "Kafka Administrator - Uber Technologies\n\nUber is seeking an experienced Kafka Administrator to join our Data Platform team.\n\nAbout the Role:\nYou will manage mission-critical Apache Kafka infrastructure powering real-time \ndata streaming for ride-hailing, food delivery, and freight operations globally.\n\nResponsibilities:\n\u2022 Manage and scale Apache Kafka clusters handling 10M+ messages per second\n\u2022 Design and implement topic architecture, partitioning strategies, and replication\n\u2022 Ensure 99.99% uptime through proactive monitoring and incident response\n\u2022 Implement security controls (SSL/TLS, SASL, Kerberos) for data protection\n\u2022 Perform capacity planning, cluster scaling, and performance optimization\n\u2022 Deploy and manage Kafka Connect for data integration pipelines\n\u2022 Configure Schema Registry for data governance and evolution\n\u2022 Automate operational tasks using Python, Bash, and infrastructure as code\n\u2022 Collaborate with data engineers and application teams on streaming solutions\n\u2022 Provide on-call support for production issues\n\nRequired Qualifications:\n\u2022 3+ years hands-on experience with Apache Kafka or Confluent Platform\n\u2022 Deep understanding of distributed systems, replication, and consistency\n\u2022 Production experience with cluster management, monitoring, and troubleshooting\n\u2022 Strong Linux/Unix system administration skills\n\u2022 Experience with containerization (Docker, Kubernetes)\n\u2022 Proficiency in scripting (Python, Bash, Shell)\n\u2022 Knowledge of monitoring tools (Prometheus, Grafana, Datadog, Splunk)\n\u2022 Experience with CI/CD pipelines and automation\n\u2022 Strong problem-solving and debugging skills\n\u2022 Excellent communication and documentation abilities\n\nPreferred Qualifications:\n\u2022 Confluent Certified Kafka Administrator or Developer\n\u2022 Experience with Kafka Streams, ksqlDB, or Apache Flink\n\u2022 AWS, Azure, or GCP cloud platform experience\n\u2022 Experience with Terraform, Ansible, or similar IaC tools\n\u2022 Knowledge of message serialization (Avro, Protobuf, JSON Schema)\n\u2022 Experience with multi-datacenter replication and disaster recovery\n\u2022 Background in SRE or platform engineering\n\u2022 Open source contributions to Kafka ecosystem\n\nTechnical Environment:\n\u2022 Apache Kafka 3.x / Confluent Platform 7.x\n\u2022 Kubernetes, Docker, Helm\n\u2022 AWS (EC2, EBS, S3, CloudWatch)\n\u2022 Terraform, Ansible\n\u2022 Prometheus, Grafana, Datadog\n\u2022 Jenkins, GitLab CI/CD\n\u2022 Python, Bash\n\nWhat We Offer:\n\u2022 Competitive salary and equity\n\u2022 Health, dental, vision insurance\n\u2022 401(k) with company match\n\u2022 Unlimited PTO\n\u2022 Remote-friendly (hybrid in SF office)\n\u2022 Learning and development budget\n\u2022 Work on massive scale (petabytes of data daily)\n\nLocation: San Francisco, CA (Hybrid - 2 days/week in office)\nSalary Range: $140,000 - $200,000 + equity\n\nTo Apply:\nSend resume to careers@uber.com with subject \"Kafka Administrator - [Your Name]\"\n\nUber is an equal opportunity employer.\n\n",
+      "jd_file_path": "data/job_descriptions/kafka_admin_uber.txt",
+      "requirements_yaml": null,
+      "posted_date": null,
+      "deadline_date": null,
+      "location": null,
+      "salary_range": null,
+      "employment_type": null,
+      "status": "active",
+      "source": null,
+      "notes": null,
+      "created_at": "2025-12-30 15:46:39",
+      "updated_at": "2025-12-30 15:46:39"
+    }
+  ],
+  "variants": [
+    {
+      "variant_id": "f66d47db-9b66-4539-bccb-e64bb45bf974",
+      "job_id": 2,
+      "base_resume_path": "data/resumes/my_resume.tex",
+      "variant_latex_path": "data/resumes/variants/resume_Testing_kafka_admin_f66d47db.tex",
+      "variant_pdf_path": "data/resumes/variants/resume_Testing_kafka_admin_f66d47db.pdf",
+      "metadata_json_path": "data/resumes/variants/resume_Testing_kafka_admin_f66d47db_metadata.json",
+      "target_bullets": 11,
+      "ai_enhancement_enabled": 1,
+      "bullets_enhanced": 5,
+      "total_bullets": 11,
+      "keywords_added": [
+        "docker",
+        "python",
+        "kubernetes",
+        "cluster management",
+        "aws",
+        "kafka"
+      ],
+      "generated_at": "2025-12-30 17:19:55"
+    },
+    {
+      "variant_id": "1ce26574-86f2-47a6-b3f6-5771ab5891ea",
+      "job_id": 1,
+      "base_resume_path": "data/resumes/my_resume.tex",
+      "variant_latex_path": "data/resumes/variants/resume_Uber_kafka_administrator_1ce26574.tex",
+      "variant_pdf_path": "data/resumes/variants/resume_Uber_kafka_administrator_1ce26574.pdf",
+      "metadata_json_path": "data/resumes/variants/resume_Uber_kafka_administrator_1ce26574_metadata.json",
+      "target_bullets": 11,
+      "ai_enhancement_enabled": 1,
+      "bullets_enhanced": 5,
+      "total_bullets": 11,
+      "keywords_added": [
+        "docker",
+        "aws",
+        "kafka",
+        "kubernetes",
+        "python"
+      ],
+      "generated_at": "2025-12-30 15:46:39"
+    }
+  ],
+  "pipeline": [
+    {
+      "job_id": 1,
+      "company": "Uber",
+      "job_title": "Kafka Administrator",
+      "location": null,
+      "job_status": "active",
+      "variants_generated": 1,
+      "applications_count": 0,
+      "best_ats_score": 54.70000000000002,
+      "last_applied_date": null
+    }
+  ],
+  "active_applications": []
+}

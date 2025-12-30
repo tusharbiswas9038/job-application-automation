@@ -1,0 +1,244 @@
+# resume/tailoring/template_engine.py
+import logging
+import subprocess
+from pathlib import Path
+from typing import Tuple, Optional
+import shutil
+
+from resume.models import ParsedResume
+from resume.tailoring.models import ResumeVariant
+
+logger = logging.getLogger(__name__)
+
+
+class TemplateEngine:
+    """
+    Generate LaTeX files from variant content
+    """
+    
+    def __init__(self):
+        pass
+    
+    def generate_files(
+        self,
+        resume: ParsedResume,
+        variant: ResumeVariant,
+        output_dir: str
+    ) -> Tuple[str, Optional[str]]:
+        """
+        Generate LaTeX and compile to PDF
+        
+        Args:
+            resume: Parsed resume (for metadata)
+            variant: Variant with content
+            output_dir: Output directory
+        
+        Returns:
+            (latex_path, pdf_path)
+        """
+        output_path = Path(output_dir)
+        output_path.mkdir(parents=True, exist_ok=True)
+        
+        # Generate filename
+        filename = variant.output_filename
+        latex_path = output_path / filename
+        
+        # Generate LaTeX content
+        latex_content = self._generate_latex(resume, variant)
+        
+        # Write file
+        with open(latex_path, 'w', encoding='utf-8') as f:
+            f.write(latex_content)
+        
+        logger.info(f"LaTeX written to: {latex_path}")
+        
+        # Compile to PDF
+        pdf_path = self._compile_pdf(latex_path)
+        
+        return str(latex_path), pdf_path
+    
+    def _generate_latex(
+        self,
+        resume: ParsedResume,
+        variant: ResumeVariant
+    ) -> str:
+        """Generate complete LaTeX document"""
+        content = variant.content
+        
+        # Build LaTeX
+        latex = r"""\documentclass{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\begin{document}
+
+% Header
+\begin{center}
+{\Huge \bfseries """ + resume.personal.name + r"""} \\[0.3em]
+"""
+        
+        # Contact info
+        contact_parts = []
+        if resume.personal.email:
+            contact_parts.append(r"\href{mailto:" + resume.personal.email + "}{" + resume.personal.email + "}")
+        if resume.personal.phone:
+            contact_parts.append(resume.personal.phone)
+        if resume.personal.linkedin:
+            contact_parts.append(r"\href{" + resume.personal.linkedin + "}{LinkedIn}")
+        if resume.personal.location:
+            contact_parts.append(resume.personal.location)
+        
+        latex += " $|$ ".join(contact_parts) + "\n"
+        latex += r"""\end{center}
+
+"""
+        
+        # Professional Summary
+        latex += r"""\section*{Professional Summary}
+""" + content.summary + """
+
+"""
+        
+        # Experience
+        latex += r"""\section*{Experience}
+
+"""
+        
+        for exp_section in content.experience_sections:
+            exp = exp_section.experience
+            
+            latex += r"""\subsection*{""" + exp.title + " -- " + exp.company + r"""}
+\textit{""" + exp.start_date + " -- " + exp.end_date + r"""}
+
+\begin{itemize}[leftmargin=*,itemsep=0pt]
+"""
+            
+            for selected_bullet in exp_section.selected_bullets:
+                # Use enhanced version if available
+                bullet_text = (
+                    selected_bullet.enhanced_version
+                    if selected_bullet.was_enhanced
+                    else selected_bullet.bullet.text
+                )
+                
+                # Escape special LaTeX characters
+                bullet_text = self._escape_latex(bullet_text)
+                
+                latex += r"\item " + bullet_text + "\n"
+            
+            latex += r"""\end{itemize}
+
+"""
+        
+        # Skills
+        latex += r"""\section*{Technical Skills}
+
+\begin{itemize}[leftmargin=*]
+"""
+        
+        if content.skills.get('technical'):
+            latex += r"\item \textbf{Technologies:} " + ", ".join(content.skills['technical'][:15]) + "\n"
+        
+        if content.skills.get('tools'):
+            latex += r"\item \textbf{Tools:} " + ", ".join(content.skills['tools'][:10]) + "\n"
+        
+        if content.skills.get('languages'):
+            latex += r"\item \textbf{Languages:} " + ", ".join(content.skills['languages'][:5]) + "\n"
+        
+        latex += r"""\end{itemize}
+
+"""
+        
+        # Education
+        if resume.education:
+            latex += r"""\section*{Education}
+
+\begin{itemize}[leftmargin=*]
+"""
+            for edu in resume.education:
+                latex += r"\item \textbf{" + edu.degree + "} -- " + edu.institution
+                if edu.graduation_date:
+                    latex += r" \textit{(" + edu.graduation_date + ")}"
+                latex += "\n"
+            
+            latex += r"""\end{itemize}
+
+"""
+        
+        # Certifications
+        if resume.certifications:
+            latex += r"""\section*{Certifications}
+
+\begin{itemize}[leftmargin=*]
+"""
+            for cert in resume.certifications:
+                latex += r"\item " + cert + "\n"
+            
+            latex += r"""\end{itemize}
+
+"""
+        
+        latex += r"""\end{document}"""
+        
+        return latex
+    
+    def _escape_latex(self, text: str) -> str:
+        """Escape special LaTeX characters"""
+        replacements = {
+            '&': r'\&',
+            '%': r'\%',
+            '$': r'\$',
+            '#': r'\#',
+            '_': r'\_',
+            '{': r'\{',
+            '}': r'\}',
+            '~': r'\textasciitilde{}',
+            '^': r'\^{}',
+        }
+        
+        for char, replacement in replacements.items():
+            text = text.replace(char, replacement)
+        
+        return text
+    
+    def _compile_pdf(self, latex_path: Path) -> Optional[str]:
+        """Compile LaTeX to PDF"""
+        try:
+            # Check if pdflatex is available
+            if not shutil.which('pdflatex'):
+                logger.warning("pdflatex not found, skipping PDF compilation")
+                return None
+            
+            # Compile
+            result = subprocess.run(
+                ['pdflatex', '-interaction=nonstopmode', '-output-directory', 
+                 str(latex_path.parent), str(latex_path)],
+                capture_output=True,
+                text=True,
+                timeout=30
+            )
+            
+            if result.returncode == 0:
+                pdf_path = latex_path.with_suffix('.pdf')
+                if pdf_path.exists():
+                    logger.info(f"PDF compiled: {pdf_path}")
+                    
+                    # Cleanup auxiliary files
+                    for ext in ['.aux', '.log', '.out']:
+                        aux_file = latex_path.with_suffix(ext)
+                        if aux_file.exists():
+                            aux_file.unlink()
+                    
+                    return str(pdf_path)
+            else:
+                logger.error(f"PDF compilation failed: {result.stderr}")
+                return None
+        
+        except subprocess.TimeoutExpired:
+            logger.error("PDF compilation timed out")
+            return None
+        except Exception as e:
+            logger.error(f"PDF compilation error: {e}")
+            return None
+

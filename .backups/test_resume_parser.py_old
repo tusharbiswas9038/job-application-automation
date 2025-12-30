@@ -1,0 +1,122 @@
+# tests/test_resume_parser.py
+import pytest
+from pathlib import Path
+from resume.latex_parser import LaTeXResumeParser
+from resume.macro_expander import LaTeXMacroExpander
+from resume.section_extractor import SectionExtractor
+
+
+@pytest.fixture
+def sample_resume_tex(tmp_path):
+    """Create a sample LaTeX resume with enumitem args"""
+    content = r"""---
+name: John Doe
+target_role: Kafka Administrator
+---
+
+\documentclass{article}
+\usepackage{enumitem}
+\begin{document}
+
+% Custom macros
+\newcommand{\myname}{John Doe}
+\newcommand{\kafkaBulletOne}{Administered Kafka cluster with 50+ nodes processing 5M messages/sec}
+\newcommand{\kafkaBulletTwo}{Implemented Schema Registry with \textbf{SSL/TLS} encryption}
+
+\section{Experience}
+
+\subsection{Kafka Administrator -- Uber Technologies}
+\textit{San Francisco, CA} \hfill \textit{Jan 2022 -- Present}
+
+\begin{itemize}[leftmargin=*, label=\textbullet]
+    \item \kafkaBulletOne{}
+    \item \kafkaBulletTwo{}
+    \item Optimized broker configurations improving throughput by 30\%
+\end{itemize}
+
+\section{Education}
+
+\subsection{BS Computer Science -- MIT}
+\textit{Cambridge, MA} \hfill \textit{2019}
+
+\section{Skills}
+
+\textbf{Technical:} Kafka, Zookeeper, Python, Bash \\
+\textbf{Tools:} Docker, Kubernetes, Terraform
+
+\end{document}
+"""
+    
+    resume_file = tmp_path / "test_resume.tex"
+    resume_file.write_text(content)
+    return resume_file
+
+
+def test_macro_expansion():
+    """Test macro extraction and expansion"""
+    content = r"\newcommand{\testMacro}{This is a test with \textbf{bold} text}"
+    
+    expander = LaTeXMacroExpander()
+    macros = expander.extract_macro_definitions(content)
+    
+    assert 'testMacro' in macros
+    assert 'test' in macros['testMacro']
+    assert 'bold' in macros['testMacro']
+
+
+def test_enumitem_parsing():
+    """Test parsing itemize with optional args [web:69]"""
+    content = r"""
+\begin{itemize}[leftmargin=*, label=\textbullet, itemsep=0pt]
+    \item First item
+    \item Second item
+\end{itemize}
+"""
+    
+    extractor = SectionExtractor()
+    blocks = extractor.extract_itemize_blocks(content)
+    
+    assert len(blocks) == 1
+    assert blocks[0]['options'] is not None
+    assert 'leftmargin=*' in blocks[0]['options']
+    assert len(blocks[0]['items']) == 2
+
+
+def test_parse_resume_with_macros(sample_resume_tex):
+    """Test full resume parsing with macro expansion"""
+    parser = LaTeXResumeParser()
+    resume = parser.parse_file(str(sample_resume_tex))
+    
+    assert resume is not None
+    assert resume.personal.name == "John Doe"
+    assert len(resume.experience) >= 1
+    assert len(resume.all_bullets) >= 3
+    
+    # Check macro expansion in bullets
+    first_bullet = resume.all_bullets[0]
+    assert 'Kafka cluster' in first_bullet.text
+    assert first_bullet.command_name == 'kafkaBulletOne'
+    
+    # Check SSL/TLS formatting preserved
+    second_bullet = resume.all_bullets[1]
+    assert 'SSL/TLS' in second_bullet.text
+
+
+def test_section_extraction(sample_resume_tex):
+    """Test section extraction"""
+    parser = LaTeXResumeParser()
+    resume = parser.parse_file(str(sample_resume_tex))
+    
+    assert len(resume.experience) > 0
+    assert len(resume.education) > 0
+    assert resume.skills.technical
+
+
+def test_frontmatter_parsing(sample_resume_tex):
+    """Test YAML frontmatter parsing"""
+    parser = LaTeXResumeParser()
+    resume = parser.parse_file(str(sample_resume_tex))
+    
+    assert resume.metadata.name == "John Doe"
+    assert resume.metadata.target_role == "Kafka Administrator"
+

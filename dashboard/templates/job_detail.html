@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+
+{% block title %}Job Details - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div x-data="jobDetailData({{ job_id }})">
+    <!-- Back Button -->
+    <a href="/jobs" class="btn btn-outline btn-sm mb-4">← Back to Jobs</a>
+    
+    <!-- Job Header -->
+    <div class="card" x-show="job">
+        <div class="flex justify-between items-start mb-4">
+            <div>
+                <h1 style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;" x-text="job.job_title"></h1>
+                <div style="font-size: 1.25rem; color: var(--gray); margin-bottom: 1rem;" x-text="job.company"></div>
+                
+                <div class="flex gap-2 flex-wrap">
+                    <span class="badge badge-info" x-text="job.status"></span>
+                    <span class="badge badge-success" x-show="job.variants_count > 0">
+                        <span x-text="job.variants_count"></span> Variants
+                    </span>
+                    <span 
+                        class="score-badge" 
+                        :class="utils.getScoreClass(job.best_ats_score)"
+                        x-show="job.best_ats_score > 0"
+                    >
+                        Best ATS: <span x-text="utils.formatScore(job.best_ats_score)"></span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="flex gap-2">
+                <a :href="'/generate?job_id=' + jobId" class="btn btn-primary">Generate Variant</a>
+                <button @click="showEditModal = true" class="btn btn-outline">Edit</button>
+            </div>
+        </div>
+        
+        <!-- Job Details -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+            <div x-show="job.location">
+                <div style="font-weight: 600; margin-bottom: 0.5rem;">Location</div>
+                <div style="color: var(--gray);" x-text="job.location"></div>
+            </div>
+            
+            <div x-show="job.salary_range">
+                <div style="font-weight: 600; margin-bottom: 0.5rem;">Salary Range</div>
+                <div style="color: var(--gray);" x-text="job.salary_range"></div>
+            </div>
+            
+            <div x-show="job.employment_type">
+                <div style="font-weight: 600; margin-bottom: 0.5rem;">Employment Type</div>
+                <div style="color: var(--gray);" x-text="job.employment_type"></div>
+            </div>
+            
+            <div x-show="job.job_url">
+                <div style="font-weight: 600; margin-bottom: 0.5rem;">Job URL</div>
+                <a :href="job.job_url" target="_blank" style="color: var(--primary);">View Posting →</a>
+            </div>
+        </div>
+        
+        <!-- Job Description -->
+        <div style="margin-top: 2rem;">
+            <div style="font-weight: 600; margin-bottom: 0.5rem;">Description</div>
+            <div style="white-space: pre-wrap; color: var(--gray); line-height: 1.8;" x-text="job.job_description"></div>
+        </div>
+        
+        <!-- Notes -->
+        <div style="margin-top: 2rem;" x-show="job.notes">
+            <div style="font-weight: 600; margin-bottom: 0.5rem;">Notes</div>
+            <div style="color: var(--gray);" x-text="job.notes"></div>
+        </div>
+    </div>
+    
+    <!-- Variants -->
+    <div class="mt-4">
+        <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">Resume Variants</h2>
+        
+        <div x-show="variants.length === 0" class="card text-center" style="padding: 2rem;">
+            <div style="color: var(--gray); margin-bottom: 1rem;">No variants generated yet</div>
+            <a :href="'/generate?job_id=' + jobId" class="btn btn-primary">Generate First Variant</a>
+        </div>
+        
+        <template x-for="variant in variants" :key="variant.variant_id">
+            <div class="card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem;">
+                            Variant #<span x-text="variant.variant_id.substring(0, 8)"></span>
+                        </div>
+                        <div style="font-size: 0.875rem; color: var(--gray); margin-bottom: 0.5rem;">
+                            Generated <span x-text="utils.formatDate(variant.generated_at)"></span>
+                        </div>
+                        <div class="flex gap-2">
+                            <span class="badge badge-info">
+                                <span x-text="variant.total_bullets"></span> bullets
+                            </span>
+                            <span class="badge badge-success" x-show="variant.bullets_enhanced > 0">
+                                <span x-text="variant.bullets_enhanced"></span> AI-enhanced
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-2 items-center">
+                        <span 
+                            class="score-badge" 
+                            :class="utils.getScoreClass(variant.ats_score)"
+                            x-show="variant.ats_score > 0"
+                        >
+                            <span x-text="utils.formatScore(variant.ats_score)"></span>
+                        </span>
+                        <a :href="'/api/files/download/variant/' + variant.variant_pdf_path.split('/').pop()" class="btn btn-primary btn-sm">
+                            Download PDF
+                        </a>
+                        <button @click="deleteVariant(variant.variant_id)" class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+    
+    <!-- Edit Modal -->
+    <div class="modal" :class="{ active: showEditModal }">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Job</h2>
+                <button @click="showEditModal = false" class="modal-close">&times;</button>
+            </div>
+            
+            <form @submit.prevent="updateJob">
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select x-model="editForm.status" class="form-select">
+                        <option value="active">Active</option>
+                        <option value="applied">Applied</option>
+                        <option value="interviewing">Interviewing</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="archived">Archived</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Deadline</label>
+                    <input type="date" x-model="editForm.deadline_date" class="form-input">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <textarea x-model="editForm.notes" class="form-textarea" rows="4"></textarea>
+                </div>
+                
+                <div class="flex gap-2">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" @click="showEditModal = false" class="btn btn-outline">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function jobDetailData(jobId) {
+    return {
+        jobId: jobId,
+        job: null,
+        variants: [],
+        showEditModal: false,
+        editForm: {
+            status: '',
+            deadline_date: '',
+            notes: ''
+        },
+        
+        init() {
+            this.loadJob();
+        },
+        
+        async loadJob() {
+            try {
+                const response = await fetch(`/api/jobs/${this.jobId}`);
+                this.job = await response.json();
+                this.variants = this.job.variants || [];
+                
+                // Populate edit form
+                this.editForm.status = this.job.status || 'active';
+                this.editForm.deadline_date = this.job.deadline_date || '';
+                this.editForm.notes = this.job.notes || '';
+            } catch (error) {
+                console.error('Failed to load job:', error);
+                utils.showToast('Failed to load job', 'error');
+            }
+        },
+        
+        async updateJob() {
+            try {
+                const formData = new FormData();
+                Object.keys(this.editForm).forEach(key => {
+                    if (this.editForm[key]) {
+                        formData.append(key, this.editForm[key]);
+                    }
+                });
+                
+                const response = await fetch(`/api/jobs/${this.jobId}`, {
+                    method: 'PUT',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    utils.showToast('Job updated successfully', 'success');
+                    this.showEditModal = false;
+                    this.loadJob();
+                } else {
+                    utils.showToast('Failed to update job', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to update job:', error);
+                utils.showToast('Failed to update job', 'error');
+            }
+        },
+        
+        async deleteVariant(variantId) {
+            if (!confirmDelete('Delete this variant?')) return;
+            
+            try {
+                const response = await fetch(`/api/variants/${variantId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    utils.showToast('Variant deleted', 'success');
+                    this.loadJob();
+                } else {
+                    utils.showToast('Failed to delete variant', 'error');
+                }
+            } catch (error) {
+                utils.showToast('Failed to delete variant', 'error');
+            }
+        }
+    }
+}
+</script>
+{% endblock %}

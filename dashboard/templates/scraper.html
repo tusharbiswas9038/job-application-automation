@@ -1,0 +1,393 @@
+{% extends "base.html" %}
+
+{% block title %}Scrape Jobs - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div x-data="scraperData()">
+    <div class="flex justify-between items-center mb-6">
+        <h1 style="font-size: 2rem; font-weight: bold;">Scrape Jobs</h1>
+        <button @click="showHistory = !showHistory" class="btn btn-outline">
+            <span x-show="!showHistory">📊 Show History</span>
+            <span x-show="showHistory">🔍 Back to Scraper</span>
+        </button>
+    </div>
+    
+    <!-- Scraping Form -->
+    <div x-show="!showHistory" class="card">
+        <div class="card-header">
+            <h2 class="card-title">Start New Scraping Job</h2>
+        </div>
+        
+        <form @submit.prevent="startScraping">
+            <div class="form-group">
+                <label class="form-label">Job Board *</label>
+                <select x-model="form.source" class="form-input" required>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="indeed" disabled>Indeed (Coming Soon)</option>
+                    <option value="naukri" disabled>Naukri (Coming Soon)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Keywords *</label>
+                <input type="text" x-model="form.keywords" class="form-input" 
+                       placeholder="e.g., Kafka Administrator, DevOps Engineer" required>
+                <div style="font-size: 0.875rem; color: var(--gray); margin-top: 0.5rem;">
+                    💡 Use specific keywords for better results
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Location *</label>
+                <input type="text" x-model="form.location" class="form-input" 
+                       placeholder="e.g., India, United States, Remote" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Max Pages</label>
+                <input type="number" x-model.number="form.max_pages" class="form-input" 
+                       min="1" max="10" value="3">
+                <div style="font-size: 0.875rem; color: var(--gray); margin-top: 0.5rem;">
+                    ~25 jobs per page. Max 10 pages recommended.
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" :disabled="scraping">
+                <span x-show="!scraping">🚀 Start Scraping</span>
+                <span x-show="scraping">⏳ Scraping...</span>
+            </button>
+        </form>
+    </div>
+    
+    <!-- Scraping Progress -->
+    <div x-show="currentJob && !showHistory" class="card mt-4">
+        <div class="card-header">
+            <h2 class="card-title">Scraping Progress</h2>
+        </div>
+        
+        <div>
+            <div class="flex justify-between mb-2">
+                <span x-text="currentJob.message"></span>
+                <span x-text="currentJob.progress + '%'"></span>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" :style="`width: ${currentJob.progress}%`"></div>
+            </div>
+            
+            <div x-show="currentJob.status === 'completed'" class="mt-4">
+                <div class="alert alert-success">
+                    ✓ Scraping completed!
+                    Found <strong x-text="currentJob.total_jobs"></strong> jobs
+                    (<strong x-text="currentJob.new_jobs"></strong> new, 
+                    <strong x-text="currentJob.duplicates"></strong> duplicates)
+                </div>
+                
+                <div class="flex gap-2 mt-3">
+                    <button @click="loadPreview(currentJob.job_id)" class="btn btn-primary">
+                        👁️ Preview Results
+                    </button>
+                    <button @click="importAll(currentJob.job_id)" class="btn btn-success">
+                        ✓ Import All New Jobs
+                    </button>
+                </div>
+            </div>
+            
+            <div x-show="currentJob.status === 'error'" class="mt-4">
+                <div class="alert alert-error" x-text="'Error: ' + currentJob.message"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Preview Results -->
+    <div x-show="preview.jobs.length > 0 && !showHistory" class="card mt-4">
+        <div class="card-header flex justify-between">
+            <h2 class="card-title">Preview Results</h2>
+            <div>
+                <button @click="importSelected" class="btn btn-primary btn-sm" 
+                        :disabled="preview.selected.length === 0">
+                    Import Selected (<span x-text="preview.selected.length"></span>)
+                </button>
+                <button @click="selectAll" class="btn btn-outline btn-sm">
+                    Select All New
+                </button>
+            </div>
+        </div>
+        
+        <div style="max-height: 600px; overflow-y: auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="40">
+                            <input type="checkbox" @change="toggleAll($event)">
+                        </th>
+                        <th>Job Title</th>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>Posted</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template x-for="job in preview.jobs" :key="job.temp_id">
+                        <tr :class="job.is_duplicate ? 'opacity-50' : ''">
+                            <td>
+                                <input type="checkbox" 
+                                       :value="job.temp_id"
+                                       x-model="preview.selected"
+                                       :disabled="job.is_duplicate">
+                            </td>
+                            <td>
+                                <a :href="job.job_url" target="_blank" 
+                                   style="color: var(--primary); text-decoration: none;"
+                                   x-text="job.job_title"></a>
+                            </td>
+                            <td x-text="job.company"></td>
+                            <td x-text="job.location"></td>
+                            <td x-text="formatDate(job.posted_date)"></td>
+                            <td>
+                                <span x-show="job.is_duplicate" class="badge badge-gray">Duplicate</span>
+                                <span x-show="!job.is_duplicate" class="badge badge-success">New</span>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Scraping History -->
+    <div x-show="showHistory" class="card">
+        <div class="card-header">
+            <h2 class="card-title">Scraping History</h2>
+        </div>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Keywords</th>
+                    <th>Location</th>
+                    <th>Source</th>
+                    <th>Results</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template x-for="job in history" :key="job.job_id">
+                    <tr>
+                        <td x-text="formatDate(job.started_at)"></td>
+                        <td x-text="job.keywords"></td>
+                        <td x-text="job.location"></td>
+                        <td x-text="job.source"></td>
+                        <td>
+                            <span x-text="job.total_jobs"></span> total,
+                            <span x-text="job.new_jobs" class="text-success"></span> new
+                        </td>
+                        <td>
+                            <span :class="'badge badge-' + getStatusColor(job.status)" 
+                                  x-text="job.status"></span>
+                        </td>
+                        <td>
+                            <button @click="loadPreview(job.job_id)" 
+                                    class="btn btn-sm btn-outline"
+                                    x-show="job.status === 'completed'">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+function scraperData() {
+    return {
+        form: {
+            source: 'linkedin',
+            keywords: '',
+            location: 'India',
+            max_pages: 3
+        },
+        scraping: false,
+        currentJob: null,
+        statusInterval: null,
+        preview: {
+            jobs: [],
+            selected: []
+        },
+        history: [],
+        showHistory: false,
+        
+        async startScraping() {
+            this.scraping = true;
+            this.currentJob = null;
+            this.preview.jobs = [];
+            this.preview.selected = [];
+            
+            try {
+                const response = await fetch('/api/scraper/start', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(this.form)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    utils.showToast('Scraping started!', 'success');
+                    this.pollStatus(data.job_id);
+                } else {
+                    utils.showToast('Failed to start scraping', 'error');
+                    this.scraping = false;
+                }
+            } catch (error) {
+                utils.showToast('Error: ' + error.message, 'error');
+                this.scraping = false;
+            }
+        },
+        
+        async pollStatus(jobId) {
+            this.statusInterval = setInterval(async () => {
+                try {
+                    const response = await fetch(`/api/scraper/status/${jobId}`);
+                    const data = await response.json();
+                    
+                    this.currentJob = data;
+                    
+                    if (data.status === 'completed' || data.status === 'error') {
+                        clearInterval(this.statusInterval);
+                        this.scraping = false;
+                        
+                        if (data.status === 'completed') {
+                            await this.loadPreview(jobId);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Failed to poll status:', error);
+                }
+            }, 2000);
+        },
+        
+        async loadPreview(jobId) {
+            try {
+                const response = await fetch(`/api/scraper/preview/${jobId}`);
+                const jobs = await response.json();
+                
+                this.preview.jobs = jobs;
+                this.preview.selected = [];
+                this.showHistory = false;
+                
+                // Auto-select non-duplicate jobs
+                this.selectAll();
+            } catch (error) {
+                utils.showToast('Failed to load preview', 'error');
+            }
+        },
+        
+        async importAll(jobId) {
+            if (!confirmDelete('Import all new jobs to database?')) return;
+            
+            try {
+                const response = await fetch(`/api/scraper/import/${jobId}`, {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    utils.showToast(
+                        `Imported ${data.imported} jobs, skipped ${data.skipped}`,
+                        'success'
+                    );
+                    this.preview.jobs = [];
+                    this.loadHistory();
+                }
+            } catch (error) {
+                utils.showToast('Import failed: ' + error.message, 'error');
+            }
+        },
+        
+        async importSelected() {
+            if (this.preview.selected.length === 0) return;
+            
+            if (!confirmDelete(`Import ${this.preview.selected.length} selected jobs?`)) return;
+            
+            try {
+                const response = await fetch(`/api/scraper/import/${this.currentJob.job_id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        job_ids: this.preview.selected
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    utils.showToast(
+                        `Imported ${data.imported} jobs`,
+                        'success'
+                    );
+                    // Remove imported jobs from preview
+                    this.preview.jobs = this.preview.jobs.filter(
+                        j => !this.preview.selected.includes(j.temp_id)
+                    );
+                    this.preview.selected = [];
+                }
+            } catch (error) {
+                utils.showToast('Import failed: ' + error.message, 'error');
+            }
+        },
+        
+        selectAll() {
+            this.preview.selected = this.preview.jobs
+                .filter(j => !j.is_duplicate)
+                .map(j => j.temp_id);
+        },
+        
+        toggleAll(event) {
+            if (event.target.checked) {
+                this.selectAll();
+            } else {
+                this.preview.selected = [];
+            }
+        },
+        
+        async loadHistory() {
+            try {
+                const response = await fetch('/api/scraper/history');
+                this.history = await response.json();
+            } catch (error) {
+                console.error('Failed to load history:', error);
+            }
+        },
+        
+        formatDate(dateStr) {
+            if (!dateStr) return 'N/A';
+            return new Date(dateStr).toLocaleDateString();
+        },
+        
+        getStatusColor(status) {
+            const colors = {
+                'running': 'warning',
+                'completed': 'success',
+                'error': 'error'
+            };
+            return colors[status] || 'gray';
+        },
+        
+        init() {
+            this.loadHistory();
+        }
+    }
+}
+</script>
+{% endblock %}

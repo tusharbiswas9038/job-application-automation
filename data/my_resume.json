@@ -1,0 +1,323 @@
+{
+  "metadata": {
+    "name": null,
+    "target_role": null,
+    "version": "1.0.0",
+    "created_at": null,
+    "updated_at": null,
+    "tags": [],
+    "custom_fields": {}
+  },
+  "source_file": "data/resumes/my_resume.tex",
+  "personal": {
+    "name": "Tushar Biswas",
+    "email": "tusharbiswas9038@gmail.com",
+    "phone": "+91 8240926092",
+    "linkedin": "biswastushar1",
+    "github": "tusharbiswas9038"
+  },
+  "summary": "Motivated and detail-oriented Kafka Administrator with 3+ years of experience managing distributed systems in production. Skilled in installing, configuring, and maintaining Apache Kafka clusters, including managing topics, partitions, replication, and access controls. Experienced in CI/CD pipelines, automation, and monitoring, with a proven record of improving reliability, reducing downtime, and optimizing performance. Adept at implementing security best practices and supporting mission-critical applications in dynamic enterprise environments.",
+  "experience": [
+    {
+      "title": "Kafka Administrator - Cloud & Infra",
+      "company": "LTIMindtree Limited",
+      "location": "Pune, India",
+      "start_date": "July 2022",
+      "end_date": "Present",
+      "bullets": [
+        {
+          "id": "ltimindtree_limited_0",
+          "text": "Managed and supported Confluent and Apache Kafka clusters across multiple environments (Dev, QA, UAT, and Production), including setup, configuration, scaling, and maintenance.",
+          "section": "experience",
+          "subsection": "LTIMindtree Limited",
+          "is_modifiable": true,
+          "original_text": null,
+          "command_name": null,
+          "line_number": null
+        },
+        {
+          "id": "ltimindtree_limited_1",
+          "text": "Streamlined broker, topic, and partition configurations to achieve high throughput and low latency for business-critical data pipelines.",
+          "section": "experience",
+          "subsection": "LTIMindtree Limited",
+          "is_modifiable": true,
+          "original_text": null,
+          "command_name": null,
+          "line_number": null
+        },
+        {
+          "id": "ltimindtree_limited_2",
+          "text": "Proactively monitored cluster health, broker performance, and consumer lag using Prometheus/Grafana, resolving bottlenecks to ensure SLA compliance.",
+          "section": "experience",
+          "subsection": "LTIMindtree Limited",
+          "is_modifiable": true,
+          "original_text": null,
+          "command_name": null,
+          "line_number": null
+        },
+        {
+          "id": "ltimindtree_limited_3",
+          "text": "Implemented security controls with SSL/TLS and SASL authentication to ensure secure communication and access management across enterprise systems.",
+          "section": "experience",
+          "subsection": "LTIMindtree Limited",
+          "is_modifiable": true,
+          "original_text": null,
+          "command_name": null,
+          "line_number": null
+        },
+        {
+          "id": "ltimindtree_limited_4",
+          "text": "Performed Kafka upgrades and patching (versions 6.x and 7.x) with minimal downtime, ensuring high availability and stability.",
+          "section": "experience",
+          "subsection": "LTIMindtree Limited",
+          "is_modifiable": true,
+          "original_text": null,
+          "command_name": null,
+          "line_number": null
+        },
+        {
+          "id": "ltimindtree_limited_5",
+          "text": "Designed and maintained disaster recovery (DR) plans for business continuity in mission-critical deployments.",
+          "section": "experience",
+          "subsection": "LTIMindtree Limited",
+          "is_modifiable": true,
+          "original_text": null,
+          "command_name": null,
+          "line_number": null
+        },
+        {
+          "id": "ltimindtree_limited_6",
+          "text": "Configured and administered Kafka Connect (source & sink connectors) to integrate external systems with Kafka, ensuring reliable and scalable data streaming.",
+          "section": "experience",
+          "subsection": "LTIMindtree Limited",
+          "is_modifiable": true,
+          "original_text": null,
+          "command_name": null,
+          "line_number": null
+        },
+        {
+          "id": "ltimindtree_limited_7",
+          "text": "Worked with ksqlDB and Schema Registry for real-time stream processing, schema evolution, and governance.",
+          "section": "experience",
+          "subsection": "LTIMindtree Limited",
+          "is_modifiable": true,
+          "original_text": null,
+          "command_name": null,
+          "line_number": null
+        },
+        {
+          "id": "ltimindtree_limited_8",
+          "text": "Collaborated with developers, application teams, and stakeholders to design and optimize data streaming solutions.",
+          "section": "experience",
+          "subsection": "LTIMindtree Limited",
+          "is_modifiable": true,
+          "original_text": null,
+          "command_name": null,
+          "line_number": null
+        },
+        {
+          "id": "ltimindtree_limited_9",
+          "text": "Created and maintained operational runbooks, documentation, and troubleshooting guides, enabling efficient cross-team support.",
+          "section": "experience",
+          "subsection": "LTIMindtree Limited",
+          "is_modifiable": true,
+          "original_text": null,
+          "command_name": null,
+          "line_number": null
+        },
+        {
+          "id": "ltimindtree_limited_10",
+          "text": "Automated Kafka operational tasks (user provisioning, topic creation, monitoring alerts) using Shell scripting and CI/CD pipelines.",
+          "section": "experience",
+          "subsection": "LTIMindtree Limited",
+          "is_modifiable": true,
+          "original_text": null,
+          "command_name": null,
+          "line_number": null
+        }
+      ],
+      "is_current": false,
+      "line_number": null
+    }
+  ],
+  "education": [
+    {
+      "degree": "Diploma in Computer Science and Technology",
+      "institution": "Technique Polytechnic Institute",
+      "location": "Hooghly, India",
+      "graduation_date": "2019 -- 2022",
+      "gpa": null,
+      "honors": null,
+      "line_number": null
+    },
+    {
+      "degree": "Higher Secondary Certificate (Commerce)",
+      "institution": "Uttarpara Govt. High School",
+      "location": "Hooghly, India",
+      "graduation_date": "2017 -- 2019",
+      "gpa": null,
+      "honors": null,
+      "line_number": null
+    }
+  ],
+  "skills": {
+    "technical": [
+      "Confluent Kafka",
+      "Apache Zookeeper",
+      "Kafka Streams",
+      "Kafka Connect",
+      "ksqlDB",
+      "Schema Registry",
+      "Shell"
+    ],
+    "tools": [
+      "Jenkins",
+      "Docker",
+      "Git",
+      "Kubernetes",
+      "Cluster Scaling",
+      "Performance Tuning",
+      "Data Replication",
+      "SSL/TLS",
+      "SASL",
+      "Kerberos",
+      "AppDynamics",
+      "Splunk",
+      "Prometheus",
+      "Grafana",
+      "Linux",
+      "ServiceNow"
+    ],
+    "languages": [],
+    "certifications": []
+  },
+  "projects": [],
+  "certifications": [
+    "Cloud Practitioner - AWS (Issued Jun 2025 \u00b7 Expires Jun 2028)",
+    "Azure Fundamentals - Microsoft (Issued Sep 2022)"
+  ],
+  "awards": [],
+  "all_bullets": [
+    {
+      "id": "ltimindtree_limited_0",
+      "text": "Managed and supported Confluent and Apache Kafka clusters across multiple environments (Dev, QA, UAT, and Production), including setup, configuration, scaling, and maintenance.",
+      "section": "experience",
+      "subsection": "LTIMindtree Limited",
+      "is_modifiable": true,
+      "original_text": null,
+      "command_name": null,
+      "line_number": null
+    },
+    {
+      "id": "ltimindtree_limited_1",
+      "text": "Streamlined broker, topic, and partition configurations to achieve high throughput and low latency for business-critical data pipelines.",
+      "section": "experience",
+      "subsection": "LTIMindtree Limited",
+      "is_modifiable": true,
+      "original_text": null,
+      "command_name": null,
+      "line_number": null
+    },
+    {
+      "id": "ltimindtree_limited_2",
+      "text": "Proactively monitored cluster health, broker performance, and consumer lag using Prometheus/Grafana, resolving bottlenecks to ensure SLA compliance.",
+      "section": "experience",
+      "subsection": "LTIMindtree Limited",
+      "is_modifiable": true,
+      "original_text": null,
+      "command_name": null,
+      "line_number": null
+    },
+    {
+      "id": "ltimindtree_limited_3",
+      "text": "Implemented security controls with SSL/TLS and SASL authentication to ensure secure communication and access management across enterprise systems.",
+      "section": "experience",
+      "subsection": "LTIMindtree Limited",
+      "is_modifiable": true,
+      "original_text": null,
+      "command_name": null,
+      "line_number": null
+    },
+    {
+      "id": "ltimindtree_limited_4",
+      "text": "Performed Kafka upgrades and patching (versions 6.x and 7.x) with minimal downtime, ensuring high availability and stability.",
+      "section": "experience",
+      "subsection": "LTIMindtree Limited",
+      "is_modifiable": true,
+      "original_text": null,
+      "command_name": null,
+      "line_number": null
+    },
+    {
+      "id": "ltimindtree_limited_5",
+      "text": "Designed and maintained disaster recovery (DR) plans for business continuity in mission-critical deployments.",
+      "section": "experience",
+      "subsection": "LTIMindtree Limited",
+      "is_modifiable": true,
+      "original_text": null,
+      "command_name": null,
+      "line_number": null
+    },
+    {
+      "id": "ltimindtree_limited_6",
+      "text": "Configured and administered Kafka Connect (source & sink connectors) to integrate external systems with Kafka, ensuring reliable and scalable data streaming.",
+      "section": "experience",
+      "subsection": "LTIMindtree Limited",
+      "is_modifiable": true,
+      "original_text": null,
+      "command_name": null,
+      "line_number": null
+    },
+    {
+      "id": "ltimindtree_limited_7",
+      "text": "Worked with ksqlDB and Schema Registry for real-time stream processing, schema evolution, and governance.",
+      "section": "experience",
+      "subsection": "LTIMindtree Limited",
+      "is_modifiable": true,
+      "original_text": null,
+      "command_name": null,
+      "line_number": null
+    },
+    {
+      "id": "ltimindtree_limited_8",
+      "text": "Collaborated with developers, application teams, and stakeholders to design and optimize data streaming solutions.",
+      "section": "experience",
+      "subsection": "LTIMindtree Limited",
+      "is_modifiable": true,
+      "original_text": null,
+      "command_name": null,
+      "line_number": null
+    },
+    {
+      "id": "ltimindtree_limited_9",
+      "text": "Created and maintained operational runbooks, documentation, and troubleshooting guides, enabling efficient cross-team support.",
+      "section": "experience",
+      "subsection": "LTIMindtree Limited",
+      "is_modifiable": true,
+      "original_text": null,
+      "command_name": null,
+      "line_number": null
+    },
+    {
+      "id": "ltimindtree_limited_10",
+      "text": "Automated Kafka operational tasks (user provisioning, topic creation, monitoring alerts) using Shell scripting and CI/CD pipelines.",
+      "section": "experience",
+      "subsection": "LTIMindtree Limited",
+      "is_modifiable": true,
+      "original_text": null,
+      "command_name": null,
+      "line_number": null
+    }
+  ],
+  "custom_commands": {
+    "resumeSubItem": "#1",
+    "resumeSubHeadingListStart": "",
+    "resumeSubHeadingListEnd": "",
+    "resumeItemListStart": "",
+    "resumeItemListEnd": "",
+    "headrulewidth": "0pt",
+    "footrulewidth": "0pt"
+  },
+  "parsed_at": "2025-12-28T19:26:13.609647",
+  "parser_version": "1.0.0"
+}

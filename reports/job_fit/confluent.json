@@ -1,0 +1,206 @@
+{
+  "evaluated_at": "2025-12-30T00:00:30.637327",
+  "candidate_name": "Tushar Biswas",
+  "job_title": "Senior Kafka Administrator",
+  "overall_fit": 36.197941176470586,
+  "fit_level": "poor",
+  "hire_recommendation": "No Hire - Poor fit for role",
+  "is_good_fit": false,
+  "component_scores": {
+    "skill": 17.294117647058822,
+    "experience": 38.4,
+    "trajectory": 37.5,
+    "culture": 70.0,
+    "education": 60.0
+  },
+  "strengths": [
+    "Specialized in: Kafka Streaming, Devops"
+  ],
+  "critical_gaps": [],
+  "development_areas": [
+    "Additional Skills to Consider:\n  • confluent_platform (Est. time: 6-12 months)\n  • python (Est. time: 6-12 months)\n  • go (Est. time: 3-6 months)\n"
+  ],
+  "skill_matches": [
+    {
+      "skill_name": "kafka",
+      "required_level": "expert",
+      "candidate_level": "beginner",
+      "match_strength": 0.4,
+      "years_experience": null
+    },
+    {
+      "skill_name": "kubernetes",
+      "required_level": "advanced",
+      "candidate_level": "beginner",
+      "match_strength": 0.5,
+      "years_experience": null
+    },
+    {
+      "skill_name": "docker",
+      "required_level": "advanced",
+      "candidate_level": "beginner",
+      "match_strength": 0.5,
+      "years_experience": null
+    },
+    {
+      "skill_name": "linux",
+      "required_level": "expert",
+      "candidate_level": "beginner",
+      "match_strength": 0.4,
+      "years_experience": null
+    },
+    {
+      "skill_name": "monitoring",
+      "required_level": "advanced",
+      "candidate_level": "beginner",
+      "match_strength": 0.5,
+      "years_experience": 1
+    },
+    {
+      "skill_name": "ci/cd",
+      "required_level": "advanced",
+      "candidate_level": "beginner",
+      "match_strength": 0.5,
+      "years_experience": null
+    },
+    {
+      "skill_name": "kafka_streams",
+      "required_level": "advanced",
+      "candidate_level": "beginner",
+      "match_strength": 0.25,
+      "years_experience": null
+    },
+    {
+      "skill_name": "ksqldb",
+      "required_level": "intermediate",
+      "candidate_level": "intermediate",
+      "match_strength": 0.5,
+      "years_experience": 1
+    },
+    {
+      "skill_name": "schema_registry",
+      "required_level": "advanced",
+      "candidate_level": "intermediate",
+      "match_strength": 0.375,
+      "years_experience": 1
+    },
+    {
+      "skill_name": "kafka_connect",
+      "required_level": "advanced",
+      "candidate_level": "intermediate",
+      "match_strength": 0.375,
+      "years_experience": 1
+    }
+  ],
+  "skill_gaps": [
+    {
+      "skill_name": "confluent_platform",
+      "required_level": "advanced",
+      "current_level": "none",
+      "importance": 1.0,
+      "gap_severity": "moderate",
+      "training_time": "6-12 months",
+      "can_learn": true
+    },
+    {
+      "skill_name": "python",
+      "required_level": "advanced",
+      "current_level": "none",
+      "importance": 1.0,
+      "gap_severity": "moderate",
+      "training_time": "6-12 months",
+      "can_learn": true
+    },
+    {
+      "skill_name": "go",
+      "required_level": "intermediate",
+      "current_level": "none",
+      "importance": 1.0,
+      "gap_severity": "moderate",
+      "training_time": "3-6 months",
+      "can_learn": true
+    },
+    {
+      "skill_name": "terraform",
+      "required_level": "advanced",
+      "current_level": "none",
+      "importance": 1.0,
+      "gap_severity": "moderate",
+      "training_time": "6-12 months",
+      "can_learn": true
+    },
+    {
+      "skill_name": "aws",
+      "required_level": "advanced",
+      "current_level": "none",
+      "importance": 0.5,
+      "gap_severity": "minor",
+      "training_time": "6-12 months",
+      "can_learn": true
+    },
+    {
+      "skill_name": "azure",
+      "required_level": "intermediate",
+      "current_level": "none",
+      "importance": 0.5,
+      "gap_severity": "minor",
+      "training_time": "3-6 months",
+      "can_learn": true
+    },
+    {
+      "skill_name": "gcp",
+      "required_level": "intermediate",
+      "current_level": "none",
+      "importance": 0.5,
+      "gap_severity": "minor",
+      "training_time": "3-6 months",
+      "can_learn": true
+    }
+  ],
+  "experience_matches": [
+    {
+      "job_title": "Kafka Administrator - Cloud & Infra",
+      "company": "LTIMindtree Limited",
+      "relevance_score": 0.46,
+      "duration_months": 36,
+      "recency_score": 1.0,
+      "matching_aspects": [
+        "Domain: data_streaming",
+        "Domain: distributed_systems",
+        "Technologies: kafka, go, monitoring"
+      ],
+      "technology_overlap": [
+        "kafka",
+        "go",
+        "monitoring",
+        "ci/cd"
+      ]
+    }
+  ],
+  "career_trajectory": {
+    "current_level": "mid",
+    "progression_trend": "insufficient_data",
+    "promotions_count": 0,
+    "avg_tenure_months": 0.0,
+    "specialization": [
+      "Kafka Streaming",
+      "Devops",
+      "Sre"
+    ],
+    "ready_for_level": "mid"
+  },
+  "culture_fit": {
+    "company_size_match": true,
+    "industry_match": false,
+    "work_style_indicators": [
+      "Collaborative",
+      "Leadership",
+      "Innovative"
+    ],
+    "values_alignment": [
+      "Efficiency",
+      "Customer Focus"
+    ],
+    "leadership_style": "servant"
+  }
+}

@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# Generated files
+data/resumes/variants/*.pdf
+data/resumes/variants/*.tex
+data/job_descriptions/*.txt
+data/job_requirements/*.yaml
+data/cache/
+
+# Logs
+*.log
+dashboard.log
+data/logs/
+
+# Sensitive
+.env
+config/secrets.py
+dashboard/config.py
+
+# Backups
+backups/
+*.backup
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test data
+test_*.py
+*_test.py

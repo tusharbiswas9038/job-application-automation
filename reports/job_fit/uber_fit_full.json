@@ -1,0 +1,165 @@
+{
+  "evaluated_at": "2025-12-29T23:59:46.531333",
+  "candidate_name": "Tushar Biswas",
+  "job_title": "Kafka Administrator",
+  "overall_fit": 59.84047619047619,
+  "fit_level": "weak",
+  "hire_recommendation": "Weak - Significant skill gaps",
+  "is_good_fit": false,
+  "component_scores": {
+    "skill": 39.66666666666667,
+    "experience": 84.85714285714285,
+    "trajectory": 50.0,
+    "culture": 70.0,
+    "education": 60.0
+  },
+  "strengths": [
+    "Specialized in: Kafka Streaming, Devops"
+  ],
+  "critical_gaps": [],
+  "development_areas": [
+    "Additional Skills to Consider:\n  • python (Est. time: 3-6 months)\n"
+  ],
+  "skill_matches": [
+    {
+      "skill_name": "kafka",
+      "required_level": "advanced",
+      "candidate_level": "beginner",
+      "match_strength": 0.5,
+      "years_experience": null
+    },
+    {
+      "skill_name": "kubernetes",
+      "required_level": "intermediate",
+      "candidate_level": "beginner",
+      "match_strength": 0.6666666666666666,
+      "years_experience": null
+    },
+    {
+      "skill_name": "docker",
+      "required_level": "intermediate",
+      "candidate_level": "beginner",
+      "match_strength": 0.6666666666666666,
+      "years_experience": null
+    },
+    {
+      "skill_name": "linux",
+      "required_level": "advanced",
+      "candidate_level": "beginner",
+      "match_strength": 0.5,
+      "years_experience": null
+    },
+    {
+      "skill_name": "monitoring",
+      "required_level": "intermediate",
+      "candidate_level": "beginner",
+      "match_strength": 0.6666666666666666,
+      "years_experience": 1
+    },
+    {
+      "skill_name": "ci/cd",
+      "required_level": "beginner",
+      "candidate_level": "beginner",
+      "match_strength": 1.0,
+      "years_experience": null
+    },
+    {
+      "skill_name": "kafka_streams",
+      "required_level": "beginner",
+      "candidate_level": "beginner",
+      "match_strength": 0.5,
+      "years_experience": null
+    },
+    {
+      "skill_name": "schema_registry",
+      "required_level": "beginner",
+      "candidate_level": "intermediate",
+      "match_strength": 0.5,
+      "years_experience": 1
+    }
+  ],
+  "skill_gaps": [
+    {
+      "skill_name": "python",
+      "required_level": "intermediate",
+      "current_level": "none",
+      "importance": 1.0,
+      "gap_severity": "moderate",
+      "training_time": "3-6 months",
+      "can_learn": true
+    },
+    {
+      "skill_name": "terraform",
+      "required_level": "intermediate",
+      "current_level": "none",
+      "importance": 0.5,
+      "gap_severity": "minor",
+      "training_time": "3-6 months",
+      "can_learn": true
+    },
+    {
+      "skill_name": "ansible",
+      "required_level": "intermediate",
+      "current_level": "none",
+      "importance": 0.5,
+      "gap_severity": "minor",
+      "training_time": "3-6 months",
+      "can_learn": true
+    },
+    {
+      "skill_name": "aws",
+      "required_level": "intermediate",
+      "current_level": "none",
+      "importance": 0.5,
+      "gap_severity": "minor",
+      "training_time": "3-6 months",
+      "can_learn": true
+    }
+  ],
+  "experience_matches": [
+    {
+      "job_title": "Kafka Administrator - Cloud & Infra",
+      "company": "LTIMindtree Limited",
+      "relevance_score": 0.6214285714285714,
+      "duration_months": 36,
+      "recency_score": 1.0,
+      "matching_aspects": [
+        "Domain: data_streaming",
+        "Domain: distributed_systems",
+        "Domain: devops",
+        "Technologies: kafka, monitoring, ci/cd"
+      ],
+      "technology_overlap": [
+        "kafka",
+        "monitoring",
+        "ci/cd"
+      ]
+    }
+  ],
+  "career_trajectory": {
+    "current_level": "mid",
+    "progression_trend": "insufficient_data",
+    "promotions_count": 0,
+    "avg_tenure_months": 0.0,
+    "specialization": [
+      "Kafka Streaming",
+      "Devops",
+      "Sre"
+    ],
+    "ready_for_level": "mid"
+  },
+  "culture_fit": {
+    "company_size_match": true,
+    "industry_match": false,
+    "work_style_indicators": [
+      "Collaborative",
+      "Leadership",
+      "Innovative"
+    ],
+    "values_alignment": [
+      "Efficiency",
+      "Customer Focus"
+    ],
+    "leadership_style": "servant"
+  }
+}

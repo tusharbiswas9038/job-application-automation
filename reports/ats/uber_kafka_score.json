@@ -1,0 +1,518 @@
+{
+  "scored_at": "2025-12-29T01:50:58.726507",
+  "job_title": null,
+  "overall_score": 52.967692307692325,
+  "grade": "F",
+  "pass_threshold": false,
+  "component_scores": {
+    "keyword": 27.70769230769234,
+    "experience": 70.0,
+    "skills": 46.92307692307692,
+    "education": 85.0,
+    "format": 100
+  },
+  "keyword_stats": {
+    "total": 37,
+    "matched": 19,
+    "match_rate": 0.5135135135135135
+  },
+  "matched_keywords": [
+    {
+      "keyword": "kafka",
+      "category": "technical",
+      "importance": 1.0,
+      "match_type": "exact",
+      "matched_text": "kafka",
+      "locations": [
+        "summary",
+        "experience",
+        "skills"
+      ],
+      "frequency": 11,
+      "score": 1.0
+    },
+    {
+      "keyword": "kubernetes",
+      "category": "technical",
+      "importance": 1.0,
+      "match_type": "exact",
+      "matched_text": "kubernetes",
+      "locations": [
+        "skills"
+      ],
+      "frequency": 1,
+      "score": 1.0
+    },
+    {
+      "keyword": "docker",
+      "category": "technical",
+      "importance": 1.0,
+      "match_type": "exact",
+      "matched_text": "docker",
+      "locations": [
+        "skills"
+      ],
+      "frequency": 1,
+      "score": 1.0
+    },
+    {
+      "keyword": "aws",
+      "category": "technical",
+      "importance": 1.0,
+      "match_type": "exact",
+      "matched_text": "aws",
+      "locations": [],
+      "frequency": 1,
+      "score": 1.0
+    },
+    {
+      "keyword": "jenkins",
+      "category": "technical",
+      "importance": 1.0,
+      "match_type": "exact",
+      "matched_text": "jenkins",
+      "locations": [
+        "skills"
+      ],
+      "frequency": 1,
+      "score": 1.0
+    },
+    {
+      "keyword": "azure",
+      "category": "technical",
+      "importance": 0.9,
+      "match_type": "exact",
+      "matched_text": "azure",
+      "locations": [],
+      "frequency": 1,
+      "score": 1.0
+    },
+    {
+      "keyword": "git",
+      "category": "technical",
+      "importance": 0.9,
+      "match_type": "exact",
+      "matched_text": "git",
+      "locations": [
+        "skills"
+      ],
+      "frequency": 1,
+      "score": 1.0
+    },
+    {
+      "keyword": "kafka administrator",
+      "category": "domain",
+      "importance": 0.8,
+      "match_type": "exact",
+      "matched_text": "kafka administrator",
+      "locations": [
+        "summary",
+        "experience"
+      ],
+      "frequency": 2,
+      "score": 1.0
+    },
+    {
+      "keyword": "apache kafka",
+      "category": "domain",
+      "importance": 0.8,
+      "match_type": "exact",
+      "matched_text": "apache kafka",
+      "locations": [
+        "summary",
+        "experience"
+      ],
+      "frequency": 2,
+      "score": 1.0
+    },
+    {
+      "keyword": "disaster recovery",
+      "category": "domain",
+      "importance": 0.8,
+      "match_type": "exact",
+      "matched_text": "disaster recovery",
+      "locations": [
+        "experience"
+      ],
+      "frequency": 1,
+      "score": 1.0
+    },
+    {
+      "keyword": "performance tuning",
+      "category": "domain",
+      "importance": 0.8,
+      "match_type": "exact",
+      "matched_text": "performance tuning",
+      "locations": [
+        "skills"
+      ],
+      "frequency": 1,
+      "score": 1.0
+    },
+    {
+      "keyword": "security",
+      "category": "domain",
+      "importance": 0.8,
+      "match_type": "exact",
+      "matched_text": "security",
+      "locations": [
+        "summary",
+        "experience"
+      ],
+      "frequency": 2,
+      "score": 1.0
+    },
+    {
+      "keyword": "monitoring",
+      "category": "domain",
+      "importance": 0.8,
+      "match_type": "exact",
+      "matched_text": "monitoring",
+      "locations": [
+        "summary",
+        "experience"
+      ],
+      "frequency": 2,
+      "score": 1.0
+    },
+    {
+      "keyword": "replication",
+      "category": "domain",
+      "importance": 0.8,
+      "match_type": "exact",
+      "matched_text": "replication",
+      "locations": [
+        "summary",
+        "skills"
+      ],
+      "frequency": 2,
+      "score": 1.0
+    },
+    {
+      "keyword": "partitioning",
+      "category": "domain",
+      "importance": 0.8,
+      "match_type": "stemmed",
+      "matched_text": "partitions",
+      "locations": [
+        "summary"
+      ],
+      "frequency": 2,
+      "score": 0.8800000000000001
+    },
+    {
+      "keyword": "prometheus grafana",
+      "category": "domain",
+      "importance": 0.4,
+      "match_type": "exact",
+      "matched_text": "prometheus grafana",
+      "locations": [
+        "skills"
+      ],
+      "frequency": 1,
+      "score": 1.0
+    },
+    {
+      "keyword": "Communication",
+      "category": "soft_skill",
+      "importance": 0.5,
+      "match_type": "exact",
+      "matched_text": "Communication",
+      "locations": [
+        "experience"
+      ],
+      "frequency": 1,
+      "score": 1.0
+    },
+    {
+      "keyword": "Troubleshooting",
+      "category": "soft_skill",
+      "importance": 0.5,
+      "match_type": "exact",
+      "matched_text": "Troubleshooting",
+      "locations": [
+        "experience"
+      ],
+      "frequency": 1,
+      "score": 1.0
+    },
+    {
+      "keyword": "Documentation",
+      "category": "soft_skill",
+      "importance": 0.5,
+      "match_type": "exact",
+      "matched_text": "Documentation",
+      "locations": [
+        "experience"
+      ],
+      "frequency": 1,
+      "score": 1.0
+    }
+  ],
+  "missing_keywords": [
+    {
+      "keyword": "python",
+      "category": "technical",
+      "importance": 1.0,
+      "synonyms": []
+    },
+    {
+      "keyword": "terraform",
+      "category": "technical",
+      "importance": 1.0,
+      "synonyms": []
+    },
+    {
+      "keyword": "ansible",
+      "category": "technical",
+      "importance": 1.0,
+      "synonyms": []
+    },
+    {
+      "keyword": "Confluent Certified",
+      "category": "certification",
+      "importance": 0.9,
+      "synonyms": []
+    },
+    {
+      "keyword": "for data",
+      "category": "technical",
+      "importance": 0.6,
+      "synonyms": []
+    },
+    {
+      "keyword": "grafana datadog",
+      "category": "technical",
+      "importance": 0.4,
+      "synonyms": []
+    },
+    {
+      "keyword": "prometheus grafana datadog",
+      "category": "technical",
+      "importance": 0.4,
+      "synonyms": []
+    },
+    {
+      "keyword": "cluster management",
+      "category": "domain",
+      "importance": 0.8,
+      "synonyms": []
+    },
+    {
+      "keyword": "python bash",
+      "category": "domain",
+      "importance": 0.6,
+      "synonyms": []
+    },
+    {
+      "keyword": "monitoring and",
+      "category": "domain",
+      "importance": 0.4,
+      "synonyms": []
+    },
+    {
+      "keyword": "kafka confluent",
+      "category": "domain",
+      "importance": 0.4,
+      "synonyms": []
+    },
+    {
+      "keyword": "confluent platform",
+      "category": "domain",
+      "importance": 0.4,
+      "synonyms": []
+    },
+    {
+      "keyword": "replication and",
+      "category": "domain",
+      "importance": 0.4,
+      "synonyms": []
+    },
+    {
+      "keyword": "terraform ansible",
+      "category": "domain",
+      "importance": 0.4,
+      "synonyms": []
+    },
+    {
+      "keyword": "hybrid office",
+      "category": "domain",
+      "importance": 0.4,
+      "synonyms": []
+    },
+    {
+      "keyword": "apache kafka confluent",
+      "category": "domain",
+      "importance": 0.4,
+      "synonyms": []
+    },
+    {
+      "keyword": "kafka confluent platform",
+      "category": "domain",
+      "importance": 0.4,
+      "synonyms": []
+    },
+    {
+      "keyword": "experience with",
+      "category": "experience",
+      "importance": 1.0,
+      "synonyms": []
+    }
+  ],
+  "section_scores": {
+    "summary": {
+      "keyword_matches": 7,
+      "total_keywords": 32,
+      "match_rate": 0.21875,
+      "density": 10.76923076923077,
+      "quality_score": 98.28571428571429,
+      "suggestions": [
+        "Add more relevant keywords to summary"
+      ]
+    },
+    "experience": {
+      "keyword_matches": 9,
+      "total_keywords": 32,
+      "match_rate": 0.28125,
+      "density": 4.736842105263158,
+      "quality_score": 100.0,
+      "suggestions": [
+        "Add more relevant keywords to experience"
+      ]
+    },
+    "skills": {
+      "keyword_matches": 8,
+      "total_keywords": 32,
+      "match_rate": 0.25,
+      "density": 25.806451612903224,
+      "quality_score": 100.0,
+      "suggestions": [
+        "Add more relevant keywords to skills"
+      ]
+    },
+    "education": {
+      "keyword_matches": 0,
+      "total_keywords": 32,
+      "match_rate": 0.0,
+      "density": 0.0,
+      "quality_score": 0,
+      "suggestions": [
+        "Add more relevant keywords to education"
+      ]
+    }
+  },
+  "recommendations": {
+    "critical": [
+      "Add 'python' - appears 10 times in JD",
+      "Add 'terraform' - appears 10 times in JD",
+      "Add 'ansible' - appears 10 times in JD",
+      "Add 'Confluent Certified' - appears 9 times in JD",
+      "Add 'cluster management' - appears 8 times in JD"
+    ],
+    "improvements": [
+      "Strengthen 'partitioning' - currently matched as 'partitions'",
+      "Use 'kubernetes' more frequently - currently only appears once",
+      "Use 'docker' more frequently - currently only appears once",
+      "Use 'aws' more frequently - currently only appears once"
+    ],
+    "enhancements": [
+      "Consider adding 'grafana datadog' to boost relevance",
+      "Consider adding 'prometheus grafana datadog' to boost relevance",
+      "Consider adding 'monitoring and' to boost relevance",
+      "Consider adding 'kafka confluent' to boost relevance",
+      "Consider adding 'confluent platform' to boost relevance"
+    ]
+  },
+  "optimization_suggestions": [
+    {
+      "priority": "critical",
+      "category": "keyword",
+      "issue": "Missing critical technical skills: python, terraform, ansible",
+      "suggestion": "Add these skills to your Technical Skills section. If you have experience with them, also mention in bullet points.",
+      "impact": 8.0,
+      "keywords_affected": [
+        "python",
+        "terraform",
+        "ansible"
+      ]
+    },
+    {
+      "priority": "high",
+      "category": "keyword",
+      "issue": "Important keywords matched weakly: 'partitioning' matched as 'partitions'",
+      "suggestion": "Use exact keyword phrasing from job description. Replace similar terms with exact matches to improve ATS parsing.",
+      "impact": 7.0,
+      "keywords_affected": [
+        "partitioning"
+      ]
+    },
+    {
+      "priority": "high",
+      "category": "content",
+      "issue": "Only 9% of bullets include quantification",
+      "suggestion": "Add numbers, percentages, or metrics to your accomplishments:\n- Cluster size, message throughput, uptime %\n- Number of systems managed\n- Performance improvements achieved\n- Team size, projects delivered",
+      "impact": 7.0,
+      "keywords_affected": []
+    },
+    {
+      "priority": "high",
+      "category": "keyword",
+      "issue": "Missing domain expertise keywords: cluster management",
+      "suggestion": "Incorporate these terms into your experience bullets where relevant. Use them naturally in context of your achievements.",
+      "impact": 6.0,
+      "keywords_affected": [
+        "cluster management"
+      ]
+    },
+    {
+      "priority": "high",
+      "category": "content",
+      "issue": "Summary section has low keyword coverage (21.9%)",
+      "suggestion": "Add more relevant keywords to summary. Currently only 7/32 keywords matched.",
+      "impact": 6.0,
+      "keywords_affected": []
+    },
+    {
+      "priority": "high",
+      "category": "content",
+      "issue": "Experience section has low keyword coverage (28.1%)",
+      "suggestion": "Add more relevant keywords to experience. Currently only 9/32 keywords matched.",
+      "impact": 6.0,
+      "keywords_affected": []
+    },
+    {
+      "priority": "high",
+      "category": "content",
+      "issue": "Skills section has low keyword coverage (25.0%)",
+      "suggestion": "Add more relevant keywords to skills. Currently only 8/32 keywords matched.",
+      "impact": 6.0,
+      "keywords_affected": []
+    },
+    {
+      "priority": "high",
+      "category": "content",
+      "issue": "Education section has low keyword coverage (0.0%)",
+      "suggestion": "Add more relevant keywords to education. Currently only 0/32 keywords matched.",
+      "impact": 6.0,
+      "keywords_affected": []
+    },
+    {
+      "priority": "medium",
+      "category": "certification",
+      "issue": "Missing certifications mentioned in JD: Confluent Certified",
+      "suggestion": "Consider obtaining these certifications if you don't have them. If you have equivalent experience, mention it explicitly.",
+      "impact": 5.0,
+      "keywords_affected": [
+        "Confluent Certified"
+      ]
+    },
+    {
+      "priority": "medium",
+      "category": "content",
+      "issue": "Many bullets lack strong action verbs",
+      "suggestion": "Start each bullet with a strong action verb:\nRecommended: managed, implemented, developed, optimized, designed",
+      "impact": 5.0,
+      "keywords_affected": []
+    }
+  ]
+}
